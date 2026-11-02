@@ -24,7 +24,13 @@
             --color-gold: #C5A059;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -402,6 +408,8 @@
         }
 
         @media (max-width: 960px) {
+            .content-area { flex: 0 0 auto; }
+            nav { position: sticky; }
             .header-container {
                 grid-template-columns: clamp(72px, 10vw, 110px) minmax(0, 1fr) clamp(72px, 10vw, 110px);
                 gap: clamp(8px, 1.5vw, 16px);
@@ -418,9 +426,18 @@
             nav { min-height: 48px; }
             .hamburger {
                 display: block;
-                top: 50%;
+                top: 0;
                 right: clamp(12px, 4vw, 24px);
-                transform: translateY(-50%);
+                width: 48px;
+                height: 46px;
+                padding: 6px;
+                border: 0;
+                background: transparent;
+                transform: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
             .nav-inner {
                 position: fixed;
@@ -474,6 +491,7 @@
             body.nav-active .hamburger span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
             body.nav-active .hamburger span:nth-child(2) { opacity: 0; }
             body.nav-active .hamburger span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            .footer-wrapper { grid-template-columns: minmax(0, 1fr); gap: 32px; }
         }
 
         @media (max-width: 768px) {
@@ -497,10 +515,6 @@
             .contact-list li { min-width: 0; }
             .contact-list li p { overflow-wrap: anywhere; }
             .footer-brand span { letter-spacing: clamp(1px, 0.7vw, 3px); }
-        }
-
-        @media (max-width: 900px) {
-            .footer-wrapper { grid-template-columns: minmax(0, 1fr); gap: 32px; }
         }
 
         @media (max-width: 420px) {
