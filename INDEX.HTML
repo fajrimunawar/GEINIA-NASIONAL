@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEINIA NASIONAL | Portal Utama</title>
+    <link rel="icon" type="image/png" href="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png">
+    <link rel="shortcut icon" type="image/png" href="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png">
+    <link rel="apple-touch-icon" href="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #000000;
+            --red: #000000;
+            --gray: #000000;
+            --border: #e0e0e0;
+            --light-gray: #f8f9fa;
+            --color-gold: #C5A059;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--navy);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- LOADING SCREEN --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1c1c1c 0%, #000000 80%);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
+
+        .loader-wrapper {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .loader-main-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 1.2;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: textReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .loader-sub-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: textReveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+        }
+
+        @keyframes textReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HEADER SECTION --- */
+        .header-container {
+            display: grid;
+            grid-template-columns: minmax(90px, 140px) minmax(0, 1fr) minmax(90px, 140px);
+            align-items: center;
+            padding: 10px clamp(16px, 2vw, 28px);
+            gap: clamp(12px, 2vw, 28px);
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .logo-kiri {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .logo-kanan {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .logo-kiri img, .logo-kanan img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 125px;
+            object-fit: contain;
+        }
+
+        .brand-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-width: 0;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.25rem, 5.3vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            text-transform: uppercase;
+            letter-spacing: clamp(1px, 0.2vw, 2.5px);
+            text-align: center;
+        }
+
+        .main-title span { color: var(--red); }
+
+        .tagline {
+            max-width: 100%;
+            font-size: clamp(0.65rem, 1.05vw, 0.9rem);
+            line-height: 1.6;
+            letter-spacing: clamp(1px, 0.28vw, 3px);
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-top: 8px;
+            font-weight: 400;
+            text-align: center;
+            overflow-wrap: anywhere;
+        }
+
+        /* --- NAVIGASI --- */
+        nav {
+            border-bottom: 2px solid var(--navy);
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item { position: relative; }
+
+        .nav-link {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--navy);
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover .nav-link { color: var(--red); }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 250px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            border-top: 3px solid var(--color-gold);
+        }
+
+        .nav-item:last-child .dropdown { right: 0; left: auto; }
+
+        .nav-item.dropdown-active > .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .dropdown a:last-child { border-bottom: none; }
+
+        .dropdown a:hover {
+            background: var(--light-gray);
+            color: var(--color-gold);
+            padding-left: 25px;
+        }
+        
+        .hamburger {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--navy);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        .content-area { flex-grow: 1; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ==========================================================================
+           FOOTER UTAMA
+           ========================================================================== */
+        .main-footer {
+            background-color: #0f1012;
+            color: #ffffff;
+            padding: 80px 20px 30px 20px;
+            margin-top: auto;
+            border-top: 4px solid var(--color-gold);
+        }
+
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; 
+            gap: 50px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .footer-brand h2, 
+        .footer-brand span, 
+        .footer-section h3 {
+            text-align: center;
+        }
+
+        .footer-brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .footer-brand span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .footer-section h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            display: block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); 
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--color-gold);
+        }
+
+        .contact-list { list-style: none; padding: 0; }
+        .contact-list li { 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: flex-start; 
+        }
+        .contact-list li i {
+            color: var(--color-gold);
+            margin-right: 15px;
+            margin-top: 4px;
+            font-size: 1.1rem;
+        }
+        .contact-list li p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #cccccc;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .contact-list li p a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-list li p a:hover { color: var(--color-gold); }
+
+        .footer-section > p.media-text {
+            color: #aaaaaa; 
+            font-size: 0.9rem; 
+            margin-bottom: 20px;
+            text-align: justify; 
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            overflow: hidden; /* Memastikan logo khusus tetap di dalam lingkaran */
+        }
+
+        .social-links a:hover {
+            background-color: var(--color-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+        }
+
+        .social-links a img.custom-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            /* Tambahkan filter: invert(1); jika logo aslinya berwarna hitam dan butuh jadi putih */
+        }
+
+        @media (max-width: 768px) {
+            .loader-main-text { font-size: 2rem; }
+            .loader-sub-text { font-size: 0.8rem; }
+            .header-container {
+                grid-template-columns: 76px minmax(0, 1fr) 76px;
+                gap: 10px;
+                padding: 14px;
+            }
+            .logo-kiri img, .logo-kanan img { max-height: 82px; }
+            .main-title { font-size: clamp(1.35rem, 5.5vw, 2.5rem); }
+            .tagline {
+                font-size: clamp(0.58rem, 1.8vw, 0.8rem);
+                letter-spacing: clamp(0.8px, 0.3vw, 2px);
+                margin-top: 6px;
+            }
+            .hamburger { display: block; }
+            .nav-inner {
+                position: fixed; left: -100%; top: 0;
+                width: 80%; max-width: 300px; height: 100vh;
+                background-color: white; flex-direction: column;
+                justify-content: flex-start; align-items: flex-start;
+                transition: 0.4s; padding-top: 60px;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+                overflow-y: auto; z-index: 999;
+            }
+            body.nav-active .nav-inner { left: 0; }
+            .nav-item { width: 100%; border-bottom: 1px solid var(--border); }
+            .nav-link { padding: 15px 25px; width: 100%; }
+            .dropdown {
+                position: static; opacity: 1; visibility: visible;
+                transform: none; box-shadow: none; width: 100%;
+                max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+                right: auto; left: auto;
+            }
+            .nav-item.dropdown-active > .dropdown { max-height: 500px; }
+            .dropdown a { padding-left: 40px; background-color: #f9f9f9; }
+            .dropdown a:hover { background-color: #e9e9e9; }
+            body::after {
+                content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; visibility: hidden; transition: opacity 0.3s;
+            }
+            body.nav-active::after { opacity: 1; visibility: visible; }
+            body.nav-active .hamburger span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            body.nav-active .hamburger span:nth-child(2) { opacity: 0; }
+            body.nav-active .hamburger span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+            .footer-wrapper { flex-direction: column; gap: 40px; }
+        }
+
+        @media (max-width: 420px) {
+            .header-container { grid-template-columns: 58px minmax(0, 1fr) 58px; gap: 8px; }
+            .logo-kiri img, .logo-kanan img { max-height: 64px; }
+            .main-title { font-size: clamp(1.2rem, 5.5vw, 1.5rem); letter-spacing: 0.5px; }
+            .tagline { font-size: 0.56rem; letter-spacing: 0.7px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="loader-wrapper">
+            <div class="loader-main-text">GEINIA NASIONAL</div>
+            <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
+        </div>
+    </div>
+
+    <header class="header-container">
+        <div class="logo-kiri">
+            <img src="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png" alt="Logo pohon GEINIA">
+        </div>
+        
+        <div class="brand-wrapper">
+            <h1 class="main-title">GEINIA <span>NASIONAL</span></h1>
+            <p class="tagline">PUSAT INTEGRASI STRATEGI DALAM PENGENDALIAN SISTEM NASIONAL MANDIRI</p>
+        </div>
+        
+        <div class="logo-kanan">
+            <img src="WhatsApp_Image_2026-11-02_at_11.33.19__1_-removebg-preview.png" alt="Logo burung Sahitya Rukun Ika">
+        </div>
+    </header>
+
+    <nav>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <div class="nav-inner">
+            <div class="nav-item"><a href="index.html" class="nav-link">Beranda</a></div>
+            <div class="nav-item">
+                <a class="nav-link">Tentang GEINIA</a>
+                <div class="dropdown">
+                    <a href="sejarah.html">Sejarah dan Latar Belakang</a>
+                    <a href="filosofi.html">Filosofi dan Landasan Konseptual</a>
+                    <a href="visi-misi.html">Visi dan Misi</a>
+                    <a href="nilai.html">Nilai dan Prinsip Dasar</a>
+                    <a href="tujuan.html">Tujuan Jangka Panjang</a>
+                    <a href="posisi.html">Posisi dan Peran Strategis</a>
+                </div>
+            </div>
+             <div class="nav-item">
+                <a class="nav-link">Struktur & Sistem</a>
+                <div class="dropdown">
+                    <a href="struktur-organisasi.html">Gambaran Struktur Organisasi</a>
+                    <a href="pilar-utama.html">Dua Pilar Utama</a>
+                    <a href="model-tata-kelola.html">Model Tata Kelola</a>
+                    <a href="sistem-koordinasi.html">Sistem Koordinasi</a>
+                    <a href="mekanisme-keputusan.html">Mekanisme Pengambilan Keputusan</a>
+                    <a href="standar-etika.html">Standar Etika dan Disiplin</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link">Kerangka Strategis</a>
+                <div class="dropdown">
+                    <a href="grand-strategy.html">Grand Strategy</a>
+                    <a href="roadmap.html">Roadmap Pengembangan</a>
+                    <a href="kerangka-kebijakan.html">Kerangka Kebijakan</a>
+                    <a href="stabilitas.html">Stabilitas Ketahanan Sistem</a>
+                    <a href="identitas.html">Penguatan Identitas</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link">Program & Inisiatif</a>
+                <div class="dropdown">
+                    <a href="program-sistem.html">Pengembangan Sistem</a>
+                    <a href="program-lembaga.html">Penguatan Kelembagaan</a>
+                    <a href="program-inovasi.html">Inovasi dan Transformasi</a>
+                    <a href="program-kolaborasi.html">Kolaborasi Strategis</a>
+                    <a href="program-kapasitas.html">Pengembangan Kapasitas</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link">Tata Kelola</a>
+                <div class="dropdown">
+                    <a href="governance-akuntabilitas.html">Prinsip Akuntabilitas</a>
+                    <a href="governance-transparansi.html">Transparansi dan Pengawasan</a>
+                    <a href="governance-sop.html">Standar Operasional Internal</a>
+                    <a href="governance-evaluasi.html">Mekanisme Evaluasi</a>
+                    <a href="governance-integritas.html">Kepatuhan dan Integritas</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link">Informasi</a>
+                <div class="dropdown">
+                    <a href="info-pernyataan.html">Pernyataan Resmi</a>
+                    <a href="info-dokumentasi.html">Dokumentasi Kegiatan</a>
+                    <a href="info-artikel.html">Artikel & Pemikiran Strategis</a>
+                    <a href="info-laporan.html">Laporan Berkala</a>
+                    <a href="info-media.html">Media dan Publikasi</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link">Kemitraan</a>
+                <div class="dropdown">
+                    <a href="mitra-prinsip.html">Prinsip Kerja Sama</a>
+                    <a href="mitra-model.html">Model Kemitraan</a>
+                    <a href="mitra-ruang.html">Ruang Kolaborasi</a>
+                    <a href="mitra-pengajuan.html">Pengajuan Kerja Sama</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link">Kontak</a>
+                <div class="dropdown">
+                    <a href="kontak-kami.html">Hubungi Kami</a>
+                    <a href="kontak-alamat.html">Alamat dan Informasi Resmi</a>
+                    <a href="kontak-formulir.html">Formulir Komunikasi</a>
+                    <a href="kontak-faq.html">Pertanyaan Umum (FAQ)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-area">
+        <div class="container">
+            </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-wrapper">
+            <div class="footer-section footer-brand">
+                <h2>GEINIA NASIONAL</h2>
+                <span>PUSAT INTEGRASI STRATEGIS</span>
+                <p>Merupakan entitas strategis yang berfokus pada pengembangan arsitektur sistem dan pemikiran jangka panjang. Kami berkomitmen untuk menciptakan dampak positif melalui kemandirian dan integritas kelembagaan yang kuat.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Kantor Pusat</h3>
+                <ul class="contact-list">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p><a href="https://www.google.com/maps/search/?api=1&query=Menara+Sudirman,+Jl.+Jend.+Sudirman" target="_blank">Menara Sudirman, Jl. Jend. Sudirman</a></p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <p><a href="mailto:sekretariat@geinianasional.id">sekretariat@geinianasional.id</a></p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <p><a href="https://wa.me/62215550199" target="_blank">(021) 555-0199</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Media & Platform</h3>
+                <p class="media-text">Ikuti kami untuk update terkini mengenai pemikiran strategis dan publikasi kegiatan kami.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a> 
+                    <a href="#"><i class="fa-brands fa-threads"></i></a> 
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" title="Logo Portal Utama">
+                        <img src="ChatGPT Image May 19, 2026, 02_19_09 PM(1).png" alt="Icon Logo" class="custom-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const preloader = document.getElementById('preloader');
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.visibility = 'hidden'; }, 800);
+            }, 4000);
+        });
+
+        const hamburger = document.querySelector('.hamburger');
+        const body = document.body;
+        hamburger.addEventListener('click', () => { body.classList.toggle('nav-active'); });
+
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const navLink = item.querySelector('.nav-link');
+            if (item.querySelector('.dropdown')) {
+                navLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const activeItem = document.querySelector('.nav-item.dropdown-active');
+                    if (activeItem && activeItem !== item) { activeItem.classList.remove('dropdown-active'); }
+                    item.classList.toggle('dropdown-active');
+                });
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                navItems.forEach(item => { item.classList.remove('dropdown-active'); });
+            }
+        });
+    </script>
+</body>
+</html>
