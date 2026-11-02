@@ -101,10 +101,10 @@
         /* --- HEADER SECTION --- */
         .header-container {
             display: grid;
-            grid-template-columns: clamp(80px, 11vw, 150px) minmax(0, 1fr) clamp(80px, 11vw, 150px);
+            grid-template-columns: clamp(64px, 10vw, 138px) minmax(0, 1fr) clamp(64px, 10vw, 138px);
             align-items: center;
-            padding: 10px clamp(18px, 2vw, 30px);
-            gap: clamp(12px, 1.8vw, 26px);
+            padding: 10px clamp(12px, 2vw, 26px);
+            gap: clamp(8px, 1.5vw, 22px);
             max-width: 1340px;
             margin: 0 auto;
         }
@@ -125,8 +125,8 @@
 
         .logo-kiri img, .logo-kanan img { 
             width: 100%; 
-            height: clamp(84px, 10.5vw, 140px);
-            max-height: 140px;
+            height: clamp(64px, 9.5vw, 128px);
+            max-height: 128px;
             object-fit: contain;
         }
 
@@ -141,33 +141,34 @@
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.6rem, 5.3vw, 4.5rem);
+            font-size: clamp(1.25rem, 4.8vw, 4rem);
             font-weight: 900;
             line-height: 1.1;
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 0.2vw, 2.5px);
+            letter-spacing: clamp(0px, 0.16vw, 2px);
             text-align: center;
+            overflow-wrap: normal;
         }
 
         .main-title span { color: var(--red); }
 
         .tagline {
             max-width: 100%;
-            font-size: clamp(0.58rem, 1.05vw, 0.9rem);
+            font-size: clamp(0.52rem, 0.95vw, 0.82rem);
             line-height: 1.6;
-            letter-spacing: clamp(0.5px, 0.2vw, 2.5px);
+            letter-spacing: clamp(0.25px, 0.16vw, 2px);
             color: var(--gray);
             text-transform: uppercase;
             margin-top: 8px;
             font-weight: 400;
             text-align: center;
-            text-wrap: pretty;
+            overflow-wrap: break-word;
         }
 
         /* --- NAVIGASI --- */
         nav {
             border-bottom: 2px solid var(--navy);
-            background: #ffffff;
+            background: #fff;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -176,21 +177,22 @@
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(9, minmax(0, 1fr));
         }
 
         .nav-item { position: relative; }
 
         .nav-link {
             display: block;
-            padding: 11px clamp(8px, 1.1vw, 16px);
+            padding: 10px 5px;
             text-decoration: none;
             color: var(--navy);
-            font-size: clamp(0.75rem, 0.95vw, 0.85rem);
+            font-size: clamp(0.64rem, 0.78vw, 0.76rem);
             font-weight: 700;
             text-transform: uppercase;
+            text-align: center;
+            line-height: 1.35;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -201,8 +203,10 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: #fff;
-            min-width: 250px;
+            z-index: 1100;
+            background-color: #fff;
+            min-width: min(250px, calc(100vw - 24px));
+            max-width: min(320px, calc(100vw - 24px));
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             opacity: 0;
             visibility: hidden;
@@ -212,7 +216,7 @@
             border-top: 3px solid var(--color-gold);
         }
 
-        .nav-item:last-child .dropdown { right: 0; left: auto; }
+        .nav-item:nth-last-child(-n+2) .dropdown { right: 0; left: auto; }
 
         .nav-item.dropdown-active > .dropdown {
             opacity: 1;
@@ -407,21 +411,21 @@
             /* Tambahkan filter: invert(1); jika logo aslinya berwarna hitam dan butuh jadi putih */
         }
 
-        @media (max-width: 960px) {
+        @media (max-width: 1100px) {
             .content-area { flex: 0 0 auto; }
             nav { position: sticky; }
             .header-container {
-                grid-template-columns: clamp(72px, 10vw, 110px) minmax(0, 1fr) clamp(72px, 10vw, 110px);
-                gap: clamp(8px, 1.5vw, 16px);
+                grid-template-columns: clamp(64px, 9vw, 100px) minmax(0, 1fr) clamp(64px, 9vw, 100px);
+                gap: clamp(8px, 1.4vw, 16px);
             }
             .logo-kiri img, .logo-kanan img {
-                height: clamp(72px, 10vw, 110px);
-                max-height: 110px;
+                height: clamp(64px, 9vw, 96px);
+                max-height: 96px;
             }
-            .main-title { font-size: clamp(2rem, 5vw, 3rem); }
+            .main-title { font-size: clamp(1.65rem, 4.5vw, 2.8rem); }
             .tagline {
-                font-size: clamp(0.62rem, 1.1vw, 0.78rem);
-                letter-spacing: clamp(0.5px, 0.2vw, 1.5px);
+                font-size: clamp(0.56rem, 1vw, 0.72rem);
+                letter-spacing: clamp(0.3px, 0.15vw, 1.2px);
             }
             nav { min-height: 48px; }
             .hamburger {
@@ -457,12 +461,14 @@
                 overflow-x: hidden;
                 overflow-y: auto;
                 z-index: 1000;
+                grid-template-columns: minmax(0, 1fr);
             }
             body.nav-active .nav-inner { transform: translateX(0); }
             .nav-item { width: 100%; border-bottom: 1px solid var(--border); }
             .nav-link { padding: 15px 25px; width: 100%; }
             .dropdown {
                 position: static;
+                background-color: #fff;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
@@ -475,8 +481,8 @@
                 left: auto;
             }
             .nav-item.dropdown-active > .dropdown { max-height: 70vh; overflow-y: auto; }
-            .dropdown a { padding-left: 40px; background-color: #f9f9f9; }
-            .dropdown a:hover { background-color: #e9e9e9; }
+            .dropdown a { padding-left: 40px; background-color: #fff; }
+            .dropdown a:hover { background-color: #f3f1eb; }
             body::after {
                 content: '';
                 position: fixed;
@@ -496,18 +502,18 @@
 
         @media (max-width: 768px) {
             .header-container {
-                grid-template-columns: clamp(56px, 12vw, 84px) minmax(0, 1fr) clamp(56px, 12vw, 84px);
-                gap: clamp(6px, 2vw, 14px);
-                padding: 12px clamp(10px, 3vw, 20px);
+                grid-template-columns: clamp(52px, 11vw, 76px) minmax(0, 1fr) clamp(52px, 11vw, 76px);
+                gap: clamp(6px, 1.8vw, 12px);
+                padding: 10px clamp(8px, 2.5vw, 16px);
             }
             .logo-kiri img, .logo-kanan img {
-                height: clamp(54px, 12vw, 82px);
-                max-height: 82px;
+                height: clamp(50px, 10vw, 72px);
+                max-height: 72px;
             }
-            .main-title { font-size: clamp(1.25rem, 5.5vw, 2.5rem); }
+            .main-title { font-size: clamp(1.15rem, 4.8vw, 2rem); }
             .tagline {
-                font-size: clamp(0.52rem, 1.8vw, 0.8rem);
-                letter-spacing: clamp(0.4px, 0.25vw, 1.8px);
+                font-size: clamp(0.5rem, 1.5vw, 0.68rem);
+                letter-spacing: clamp(0.2px, 0.18vw, 1px);
                 margin-top: 6px;
             }
             .main-footer { padding: 36px 18px 24px; }
@@ -518,10 +524,10 @@
         }
 
         @media (max-width: 420px) {
-            .header-container { grid-template-columns: 52px minmax(0, 1fr) 52px; gap: 6px; padding-inline: 8px; }
-            .logo-kiri img, .logo-kanan img { height: 52px; }
-            .main-title { font-size: clamp(1.08rem, 5vw, 1.35rem); letter-spacing: 0; }
-            .tagline { font-size: clamp(0.48rem, 2.2vw, 0.58rem); letter-spacing: 0.35px; }
+            .header-container { grid-template-columns: clamp(46px, 13vw, 54px) minmax(0, 1fr) clamp(46px, 13vw, 54px); gap: 5px; padding-inline: 6px; }
+            .logo-kiri img, .logo-kanan img { height: clamp(46px, 13vw, 54px); }
+            .main-title { font-size: clamp(1rem, 5vw, 1.25rem); letter-spacing: 0; }
+            .tagline { font-size: clamp(0.46rem, 2vw, 0.54rem); letter-spacing: 0.2px; }
             .nav-link { padding-inline: 18px; }
             .footer-brand h2 { font-size: clamp(1.4rem, 7vw, 1.8rem); }
             .footer-brand span { font-size: 0.66rem; }
