@@ -165,7 +165,7 @@
             overflow-wrap: break-word;
         }
 
-        /* --- NAVIGASI --- */
+        /* --- NAVIGASI (DIPERBAIKI AGAR JARAK KANAN-KIRI SEJAJAR RAPI) --- */
         nav {
             border-bottom: 2px solid var(--navy);
             background: #fff;
@@ -177,24 +177,39 @@
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(9, minmax(0, 1fr));
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
         }
 
-        .nav-item { position: relative; }
+        .nav-item {
+            position: relative;
+            flex-shrink: 0;
+        }
 
         .nav-link {
             display: block;
-            padding: 10px 5px;
+            padding: 12px 4px;
             text-decoration: none;
             color: var(--navy);
-            font-size: clamp(0.64rem, 0.78vw, 0.76rem);
+            font-size: clamp(0.66rem, 0.8vw, 0.78rem);
             font-weight: 700;
             text-transform: uppercase;
             text-align: center;
             line-height: 1.35;
+            white-space: nowrap;
             transition: all 0.3s ease;
             cursor: pointer;
+        }
+
+        .nav-item:first-child .nav-link {
+            padding-left: 0;
+        }
+
+        .nav-item:last-child .nav-link {
+            padding-right: 0;
         }
 
         .nav-item:hover .nav-link { color: var(--red); }
@@ -292,27 +307,49 @@
             min-width: 0;
         }
 
-        .footer-brand h2, 
-        .footer-brand span, 
-        .footer-section h3 {
-            text-align: center;
+        /* LOGO DAN BRAND DI FOOTER KIRI */
+        .footer-brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .footer-brand-titles {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 0;
         }
 
         .footer-brand h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: clamp(1.35rem, 2vw, 1.65rem);
             color: #fff;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
+            margin-bottom: 4px;
+            letter-spacing: 0.8px;
+            line-height: 1.15;
+            text-align: left;
         }
+
         .footer-brand span {
             display: block;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--color-gold);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 25px;
+            letter-spacing: 2.2px;
+            margin-bottom: 0;
             font-weight: 600;
+            text-align: left;
         }
         
         .footer-brand p {
@@ -330,6 +367,7 @@
             position: relative;
             padding-bottom: 10px;
             display: block;
+            text-align: center;
         }
         
         .footer-section h3::after {
@@ -372,7 +410,7 @@
         .footer-section > p.media-text {
             color: #aaaaaa; 
             font-size: 0.9rem; 
-            margin-bottom: 20px;
+            margin-bottom: 20px; 
             text-align: justify; 
         }
 
@@ -395,7 +433,7 @@
             border-radius: 50%;
             text-decoration: none;
             transition: all 0.3s ease;
-            overflow: hidden; /* Memastikan logo khusus tetap di dalam lingkaran */
+            overflow: hidden;
         }
 
         .social-links a:hover {
@@ -408,7 +446,6 @@
             width: 22px;
             height: 22px;
             object-fit: contain;
-            /* Tambahkan filter: invert(1); jika logo aslinya berwarna hitam dan butuh jadi putih */
         }
 
         @media (max-width: 1100px) {
@@ -451,21 +488,29 @@
                 height: 100vh;
                 height: 100dvh;
                 background-color: white;
+                display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-start;
+                gap: 0;
+                padding: 64px 0 0 0;
                 transform: translateX(-105%);
                 transition: transform 0.3s ease;
-                padding-top: 64px;
                 box-shadow: 2px 0 10px rgba(0,0,0,0.1);
                 overflow-x: hidden;
                 overflow-y: auto;
                 z-index: 1000;
-                grid-template-columns: minmax(0, 1fr);
             }
             body.nav-active .nav-inner { transform: translateX(0); }
             .nav-item { width: 100%; border-bottom: 1px solid var(--border); }
-            .nav-link { padding: 15px 25px; width: 100%; }
+            .nav-link,
+            .nav-item:first-child .nav-link,
+            .nav-item:last-child .nav-link {
+                padding: 15px 25px;
+                width: 100%;
+                text-align: left;
+                white-space: normal;
+            }
             .dropdown {
                 position: static;
                 background-color: #fff;
@@ -474,6 +519,7 @@
                 transform: none;
                 box-shadow: none;
                 width: 100%;
+                max-width: 100%;
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.3s ease;
@@ -520,7 +566,7 @@
             .footer-brand p, .footer-section > p.media-text { text-align: left; }
             .contact-list li { min-width: 0; }
             .contact-list li p { overflow-wrap: anywhere; }
-            .footer-brand span { letter-spacing: clamp(1px, 0.7vw, 3px); }
+            .footer-brand span { letter-spacing: clamp(1px, 0.7vw, 2.2px); }
         }
 
         @media (max-width: 420px) {
@@ -529,8 +575,9 @@
             .main-title { font-size: clamp(1rem, 5vw, 1.25rem); letter-spacing: 0; }
             .tagline { font-size: clamp(0.46rem, 2vw, 0.54rem); letter-spacing: 0.2px; }
             .nav-link { padding-inline: 18px; }
-            .footer-brand h2 { font-size: clamp(1.4rem, 7vw, 1.8rem); }
-            .footer-brand span { font-size: 0.66rem; }
+            .footer-brand-logo { width: 54px; height: 54px; }
+            .footer-brand h2 { font-size: clamp(1.25rem, 6vw, 1.6rem); }
+            .footer-brand span { font-size: 0.64rem; }
             .contact-list li { gap: 4px; }
         }
 
@@ -584,7 +631,7 @@
                     <a href="posisi.html">Posisi dan Peran Strategis</a>
                 </div>
             </div>
-             <div class="nav-item">
+            <div class="nav-item">
                 <a class="nav-link">Struktur & Sistem</a>
                 <div class="dropdown">
                     <a href="struktur-organisasi.html">Gambaran Struktur Organisasi</a>
@@ -658,14 +705,19 @@
 
     <main class="content-area">
         <div class="container">
-            </div>
+        </div>
     </main>
 
     <footer class="main-footer">
         <div class="footer-wrapper">
             <div class="footer-section footer-brand">
-                <h2>GEINIA NASIONAL</h2>
-                <span>PUSAT INTEGRASI STRATEGIS</span>
+                <div class="footer-brand-header">
+                    <img src="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png" alt="Logo GEINIA Nasional" class="footer-brand-logo">
+                    <div class="footer-brand-titles">
+                        <h2>GEINIA NASIONAL</h2>
+                        <span>PUSAT INTEGRASI STRATEGIS</span>
+                    </div>
+                </div>
                 <p>Merupakan entitas strategis yang berfokus pada pengembangan arsitektur sistem dan pemikiran jangka panjang. Kami berkomitmen untuk menciptakan dampak positif melalui kemandirian dan integritas kelembagaan yang kuat.</p>
             </div>
 
