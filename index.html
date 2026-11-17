@@ -43,7 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN --- */
+        /* --- LOADING SCREEN (4.5 DETIK) --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -56,7 +56,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.35s ease-out, visibility 0.35s ease-out;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
         }
 
         .loader-wrapper {
@@ -76,7 +76,7 @@
             text-shadow: 0 4px 10px rgba(0,0,0,0.5);
             opacity: 0;
             transform: translateY(30px);
-            animation: textReveal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
         .loader-sub-text {
@@ -91,21 +91,21 @@
             margin-top: 10px;
             opacity: 0;
             transform: translateY(20px);
-            animation: textReveal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+            animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
         }
 
         @keyframes textReveal {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- HEADER SECTION --- */
+        /* --- HEADER SECTION (UKURAN LOGO KANAN & KIRI DIPERBESAR SEDIKIT) --- */
         .header-container {
             display: grid;
-            grid-template-columns: clamp(64px, 10vw, 138px) minmax(0, 1fr) clamp(64px, 10vw, 138px);
+            grid-template-columns: clamp(76px, 11vw, 155px) minmax(0, 1fr) clamp(76px, 11vw, 155px);
             align-items: center;
-            padding: 10px clamp(12px, 2vw, 26px);
+            padding: 12px clamp(12px, 2vw, 26px);
             gap: clamp(8px, 1.5vw, 22px);
-            max-width: 1340px;
+            max-width: 1380px;
             margin: 0 auto;
         }
 
@@ -125,8 +125,8 @@
 
         .logo-kiri img, .logo-kanan img { 
             width: 100%; 
-            height: clamp(64px, 9.5vw, 128px);
-            max-height: 128px;
+            height: clamp(74px, 11vw, 146px);
+            max-height: 146px;
             object-fit: contain;
         }
 
@@ -165,7 +165,7 @@
             overflow-wrap: break-word;
         }
 
-        /* --- NAVIGASI (DIPERBAIKI AGAR JARAK KANAN-KIRI SEJAJAR RAPI) --- */
+        /* --- NAVIGASI --- */
         nav {
             border-bottom: 2px solid var(--navy);
             background: #fff;
@@ -307,7 +307,6 @@
             min-width: 0;
         }
 
-        /* LOGO DAN BRAND DI FOOTER KIRI */
         .footer-brand-header {
             display: flex;
             align-items: center;
@@ -764,7 +763,8 @@
             preloader.style.opacity = '0';
             preloader.style.visibility = 'hidden';
         };
-        window.setTimeout(hidePreloader, 300);
+        // Mengatur durasi preloader menjadi 4.5 detik (4500 milidetik)
+        window.setTimeout(hidePreloader, 4500);
 
         const hamburger = document.querySelector('.hamburger');
         const body = document.body;
