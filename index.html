@@ -210,7 +210,7 @@
             text-align: center;
         }
 
-        /* --- NAVIGASI & DESAIN BARU MEGA MENU GRID (BERBEDA, BERKELAS, BERWIBAWA) --- */
+        /* --- NAVIGASI & PENYESUAIAN POSISI SUB-MENU RAPI --- */
         nav {
             border-bottom: 2px solid var(--navy);
             background: #ffffff;
@@ -228,6 +228,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
+            position: relative;
         }
 
         .nav-item {
@@ -254,66 +255,56 @@
         .nav-item:last-child .nav-link { padding-right: 0; }
         .nav-item:hover .nav-link { color: var(--color-gold); }
 
-        /* BENTUKAN BARU: MEGA MENU GRID KARTU MEWAH (BUKAN LIST KE BAWAH) */
+        /* KARTU SUB-MENU YANG MENYESUAIKAN POSISI DI BAWAH MASING-MASING MENU UTAMA */
         .dropdown {
             position: absolute;
-            top: calc(100% + 6px);
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
+            top: calc(100% + 2px);
+            left: 0;
             z-index: 1100;
-            background: linear-gradient(135deg, #0d0e10 0%, #18191d 100%);
-            width: 440px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(197, 160, 89, 0.3);
+            background: linear-gradient(145deg, #111215 0%, #1a1b20 100%);
+            min-width: 240px;
+            max-width: 280px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(197, 160, 89, 0.25);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 14px;
-            border-top: 4px solid var(--color-gold);
-            padding: 16px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            transform: translateY(8px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 10px;
+            border-top: 3px solid var(--color-gold);
+            padding: 6px 0;
         }
 
-        /* Penyesuaian agar menu di ujung kanan tetap aman di dalam layar */
-        .nav-item:nth-last-child(-n+3) .dropdown {
+        /* Penyesuaian khusus untuk menu-menu di bagian tengah/kanan agar posisinya sejajar rapi dan tidak keluar layar */
+        .nav-item:nth-child(n+5) .dropdown {
             left: auto;
             right: 0;
-            transform: translateY(10px);
         }
 
         .nav-item.dropdown-active > .dropdown {
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .nav-item:nth-last-child(-n+3).dropdown-active > .dropdown {
             transform: translateY(0);
         }
 
         .dropdown a {
-            display: flex;
-            align-items: center;
-            padding: 12px 14px;
+            display: block;
+            padding: 11px 18px;
             text-decoration: none;
-            color: #e5e7eb;
-            font-size: 0.78rem;
+            color: #d1d5db;
+            font-size: 0.82rem;
             font-weight: 500;
-            line-height: 1.35;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            transition: all 0.25s ease;
+            line-height: 1.4;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
             text-align: left;
         }
+        
+        .dropdown a:last-child { border-bottom: none; }
 
         .dropdown a:hover {
-            background: linear-gradient(135deg, rgba(197, 160, 89, 0.2) 0%, rgba(197, 160, 89, 0.08) 100%);
-            border-color: var(--color-gold);
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.15);
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--color-gold);
+            padding-left: 23px;
             font-weight: 600;
         }
         
@@ -519,13 +510,10 @@
                 border: none;
                 border-radius: 0;
                 padding: 0;
-                display: flex;
-                flex-direction: column;
-                gap: 0;
             }
             .nav-item.dropdown-active > .dropdown { max-height: 70vh; overflow-y: auto; }
-            .dropdown a { padding-left: 35px; color: #d1d5db; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; }
-            .dropdown a:hover { background-color: rgba(197, 160, 89, 0.15); padding-left: 40px; color: var(--color-gold); transform: none; box-shadow: none; }
+            .dropdown a { padding-left: 35px; color: #d1d5db; }
+            .dropdown a:hover { background-color: rgba(197, 160, 89, 0.15); padding-left: 40px; color: var(--color-gold); }
             body::after {
                 content: '';
                 position: fixed;
