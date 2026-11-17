@@ -43,69 +43,119 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN --- */
+        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK RAPI TANPA SHADOW) --- */
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #1c1c1c 0%, #000000 80%);
+            background: radial-gradient(circle at center, #141414 0%, #000000 85%);
             z-index: 99999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.35s ease-out, visibility 0.35s ease-out;
+            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
         }
 
         .loader-wrapper {
             text-align: center;
             position: relative;
             z-index: 2;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 20px;
         }
 
         .loader-main-text {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 8vw, 3.5rem);
+            font-size: clamp(1.8rem, 6.5vw, 3.2rem);
             font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 1vw, 5px);
+            letter-spacing: clamp(1px, 1vw, 4px);
             line-height: 1.15;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
             opacity: 0;
-            transform: translateY(30px);
-            animation: textReveal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            transform: translateY(20px);
+            animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
         .loader-sub-text {
             font-family: 'Inter', sans-serif;
-            font-size: clamp(0.7rem, 3vw, 1rem);
+            font-size: clamp(0.7rem, 2.5vw, 0.95rem);
             font-weight: 600;
             color: var(--color-gold);
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 0.8vw, 4px);
-            line-height: 1.5;
-            padding: 0 16px;
-            margin-top: 10px;
+            letter-spacing: clamp(1px, 0.8vw, 3px);
+            margin-top: 8px;
             opacity: 0;
-            transform: translateY(20px);
-            animation: textReveal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+            transform: translateY(15px);
+            animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
         }
 
         @keyframes textReveal {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- HEADER SECTION --- */
+        .batik-ornament-box {
+            width: min(420px, 80vw);
+            margin: 16px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: batikBoxReveal 0.8s ease-out 0.35s forwards;
+        }
+
+        .batik-svg {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            /* Shadow dihapus total agar bersih dan presisi */
+            filter: none !important;
+        }
+
+        .batik-draw-main {
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            animation: drawBatikStroke 3.2s cubic-bezier(0.25, 0.85, 0.35, 1) 0.4s forwards;
+        }
+
+        .batik-draw-detail {
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+            animation: drawBatikStroke 2.8s cubic-bezier(0.25, 0.85, 0.35, 1) 0.6s forwards;
+        }
+
+        .batik-kawung-core {
+            opacity: 0;
+            transform-origin: 350px 72px;
+            transform: scale(0.6);
+            animation: coreBloom 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s forwards;
+        }
+
+        @keyframes batikBoxReveal {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes drawBatikStroke {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes coreBloom {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- HEADER SECTION (LOGO KIRI & KANAN SEJAJAR SEIMBANG) --- */
         .header-container {
             display: grid;
-            grid-template-columns: clamp(64px, 10vw, 138px) minmax(0, 1fr) clamp(64px, 10vw, 138px);
+            grid-template-columns: 110px minmax(0, 1fr) 110px;
             align-items: center;
-            padding: 10px clamp(12px, 2vw, 26px);
-            gap: clamp(8px, 1.5vw, 22px);
-            max-width: 1340px;
+            padding: 14px 24px;
+            gap: 16px;
+            max-width: 1380px;
             margin: 0 auto;
         }
 
@@ -123,10 +173,11 @@
             justify-content: flex-end;
         }
 
+        /* Ukuran kedua logo disetarakan agar seimbang proporsional */
         .logo-kiri img, .logo-kanan img { 
-            width: 100%; 
-            height: clamp(64px, 9.5vw, 128px);
-            max-height: 128px;
+            width: 95px; 
+            height: 95px;
+            max-height: 95px;
             object-fit: contain;
         }
 
@@ -141,31 +192,29 @@
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.25rem, 4.8vw, 4rem);
+            font-size: clamp(1.4rem, 4.2vw, 3.2rem);
             font-weight: 900;
             line-height: 1.1;
             text-transform: uppercase;
-            letter-spacing: clamp(0px, 0.16vw, 2px);
+            letter-spacing: 1.5px;
             text-align: center;
-            overflow-wrap: normal;
         }
 
         .main-title span { color: var(--red); }
 
         .tagline {
             max-width: 100%;
-            font-size: clamp(0.52rem, 0.95vw, 0.82rem);
-            line-height: 1.6;
-            letter-spacing: clamp(0.25px, 0.16vw, 2px);
+            font-size: clamp(0.55rem, 0.9vw, 0.78rem);
+            line-height: 1.5;
+            letter-spacing: 1.5px;
             color: var(--gray);
             text-transform: uppercase;
-            margin-top: 8px;
+            margin-top: 6px;
             font-weight: 400;
             text-align: center;
-            overflow-wrap: break-word;
         }
 
-        /* --- NAVIGASI (DIPERBAIKI AGAR JARAK KANAN-KIRI SEJAJAR RAPI) --- */
+        /* --- NAVIGASI --- */
         nav {
             border-bottom: 2px solid var(--navy);
             background: #fff;
@@ -204,15 +253,9 @@
             cursor: pointer;
         }
 
-        .nav-item:first-child .nav-link {
-            padding-left: 0;
-        }
-
-        .nav-item:last-child .nav-link {
-            padding-right: 0;
-        }
-
-        .nav-item:hover .nav-link { color: var(--red); }
+        .nav-item:first-child .nav-link { padding-left: 0; }
+        .nav-item:last-child .nav-link { padding-right: 0; }
+        .nav-item:hover .nav-link { color: var(--color-gold); }
 
         .dropdown {
             position: absolute;
@@ -277,17 +320,13 @@
         }
 
         .content-area { flex: 1 0 auto; }
-        .content-area > .container { padding-block: 0; }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* ==========================================================================
-           FOOTER UTAMA
-           ========================================================================== */
+        /* --- FOOTER UTAMA --- */
         .main-footer {
             background-color: #0f1012;
             color: #ffffff;
@@ -303,11 +342,8 @@
             gap: clamp(24px, 4vw, 50px);
         }
 
-        .footer-section {
-            min-width: 0;
-        }
+        .footer-section { min-width: 0; }
 
-        /* LOGO DAN BRAND DI FOOTER KIRI */
         .footer-brand-header {
             display: flex;
             align-items: center;
@@ -316,21 +352,8 @@
             margin-bottom: 20px;
         }
 
-        .footer-brand-logo {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .footer-brand-titles {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            min-width: 0;
-        }
-
+        .footer-brand-logo { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
+        .footer-brand-titles { display: flex; flex-direction: column; align-items: flex-start; text-align: left; min-width: 0; }
         .footer-brand h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.35rem, 2vw, 1.65rem);
@@ -347,17 +370,11 @@
             color: var(--color-gold);
             text-transform: uppercase;
             letter-spacing: 2.2px;
-            margin-bottom: 0;
             font-weight: 600;
             text-align: left;
         }
         
-        .footer-brand p {
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            line-height: 1.7;
-            text-align: justify;
-        }
+        .footer-brand p { font-size: 0.9rem; color: #aaaaaa; line-height: 1.7; text-align: justify; }
 
         .footer-section h3 {
             font-family: 'Inter', sans-serif;
@@ -382,46 +399,15 @@
         }
 
         .contact-list { list-style: none; padding: 0; }
-        .contact-list li { 
-            margin-bottom: 20px; 
-            display: flex; 
-            align-items: flex-start; 
-        }
-        .contact-list li i {
-            color: var(--color-gold);
-            margin-right: 15px;
-            margin-top: 4px;
-            font-size: 1.1rem;
-        }
-        .contact-list li p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #cccccc;
-            line-height: 1.5;
-            text-align: left;
-        }
-        .contact-list li p a {
-            color: #cccccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+        .contact-list li { margin-bottom: 20px; display: flex; align-items: flex-start; }
+        .contact-list li i { color: var(--color-gold); margin-right: 15px; margin-top: 4px; font-size: 1.1rem; }
+        .contact-list li p { margin: 0; font-size: 0.9rem; color: #cccccc; line-height: 1.5; text-align: left; }
+        .contact-list li p a { color: #cccccc; text-decoration: none; transition: color 0.3s ease; }
         .contact-list li p a:hover { color: var(--color-gold); }
 
-        .footer-section > p.media-text {
-            color: #aaaaaa; 
-            font-size: 0.9rem; 
-            margin-bottom: 20px; 
-            text-align: justify; 
-        }
+        .footer-section > p.media-text { color: #aaaaaa; font-size: 0.9rem; margin-bottom: 20px; text-align: justify; }
 
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-            justify-content: center;
-        }
-
+        .social-links { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
         .social-links a {
             display: flex;
             align-items: center;
@@ -442,40 +428,29 @@
             box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
         }
 
-        .social-links a img.custom-icon {
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-        }
+        .social-links a img.custom-icon { width: 22px; height: 22px; object-fit: contain; }
 
         @media (max-width: 1100px) {
             .content-area { flex: 0 0 auto; }
             nav { position: sticky; }
             .header-container {
-                grid-template-columns: clamp(64px, 9vw, 100px) minmax(0, 1fr) clamp(64px, 9vw, 100px);
-                gap: clamp(8px, 1.4vw, 16px);
+                grid-template-columns: 80px minmax(0, 1fr) 80px;
+                gap: 12px;
+                padding: 10px 16px;
             }
-            .logo-kiri img, .logo-kanan img {
-                height: clamp(64px, 9vw, 96px);
-                max-height: 96px;
-            }
-            .main-title { font-size: clamp(1.65rem, 4.5vw, 2.8rem); }
-            .tagline {
-                font-size: clamp(0.56rem, 1vw, 0.72rem);
-                letter-spacing: clamp(0.3px, 0.15vw, 1.2px);
-            }
+            .logo-kiri img, .logo-kanan img { width: 75px; height: 75px; max-height: 75px; }
+            .main-title { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+            .tagline { font-size: clamp(0.5rem, 0.9vw, 0.68rem); }
             nav { min-height: 48px; }
             .hamburger {
-                display: block;
+                display: flex;
                 top: 0;
-                right: clamp(12px, 4vw, 24px);
+                right: 20px;
                 width: 48px;
                 height: 46px;
                 padding: 6px;
                 border: 0;
                 background: transparent;
-                transform: none;
-                display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -546,48 +521,11 @@
             .footer-wrapper { grid-template-columns: minmax(0, 1fr); gap: 32px; }
         }
 
-        @media (max-width: 768px) {
-            .header-container {
-                grid-template-columns: clamp(52px, 11vw, 76px) minmax(0, 1fr) clamp(52px, 11vw, 76px);
-                gap: clamp(6px, 1.8vw, 12px);
-                padding: 10px clamp(8px, 2.5vw, 16px);
-            }
-            .logo-kiri img, .logo-kanan img {
-                height: clamp(50px, 10vw, 72px);
-                max-height: 72px;
-            }
-            .main-title { font-size: clamp(1.15rem, 4.8vw, 2rem); }
-            .tagline {
-                font-size: clamp(0.5rem, 1.5vw, 0.68rem);
-                letter-spacing: clamp(0.2px, 0.18vw, 1px);
-                margin-top: 6px;
-            }
-            .main-footer { padding: 36px 18px 24px; }
-            .footer-brand p, .footer-section > p.media-text { text-align: left; }
-            .contact-list li { min-width: 0; }
-            .contact-list li p { overflow-wrap: anywhere; }
-            .footer-brand span { letter-spacing: clamp(1px, 0.7vw, 2.2px); }
-        }
-
         @media (max-width: 420px) {
-            .header-container { grid-template-columns: clamp(46px, 13vw, 54px) minmax(0, 1fr) clamp(46px, 13vw, 54px); gap: 5px; padding-inline: 6px; }
-            .logo-kiri img, .logo-kanan img { height: clamp(46px, 13vw, 54px); }
-            .main-title { font-size: clamp(1rem, 5vw, 1.25rem); letter-spacing: 0; }
-            .tagline { font-size: clamp(0.46rem, 2vw, 0.54rem); letter-spacing: 0.2px; }
-            .nav-link { padding-inline: 18px; }
-            .footer-brand-logo { width: 54px; height: 54px; }
-            .footer-brand h2 { font-size: clamp(1.25rem, 6vw, 1.6rem); }
-            .footer-brand span { font-size: 0.64rem; }
-            .contact-list li { gap: 4px; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+            .header-container { grid-template-columns: 65px minmax(0, 1fr) 65px; gap: 8px; padding-inline: 10px; }
+            .logo-kiri img, .logo-kanan img { width: 60px; height: 60px; max-height: 60px; }
+            .main-title { font-size: clamp(1.1rem, 4.5vw, 1.4rem); letter-spacing: 0.5px; }
+            .tagline { font-size: 0.48rem; letter-spacing: 0.8px; }
         }
     </style>
 </head>
@@ -596,6 +534,73 @@
         <div class="loader-wrapper">
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
+            
+            <div class="batik-ornament-box" aria-hidden="true">
+                <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="goldBatikGrad" x1="20" y1="20" x2="680" y2="155" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#9A7634"/>
+                            <stop offset="25%" stop-color="#E7C87D"/>
+                            <stop offset="50%" stop-color="#FFF0C2"/>
+                            <stop offset="75%" stop-color="#E7C87D"/>
+                            <stop offset="100%" stop-color="#9A7634"/>
+                        </linearGradient>
+                        <linearGradient id="goldFillSoft" x1="350" y1="12" x2="350" y2="162" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#C5A059" stop-opacity="0.22"/>
+                            <stop offset="100%" stop-color="#7A5A20" stop-opacity="0.06"/>
+                        </linearGradient>
+                    </defs>
+
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
+                        <path class="batik-draw-detail" stroke-width="1.4"
+                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
+                        <path class="batik-draw-detail" stroke-width="1.7"
+                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
+                    </g>
+
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(700, 0) scale(-1, 1)">
+                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
+                        <path class="batik-draw-detail" stroke-width="1.4"
+                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
+                        <path class="batik-draw-detail" stroke-width="1.7"
+                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
+                    </g>
+
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="batik-draw-main" stroke-width="2.3" fill="#0d0c0a"
+                            d="M350 12 C336 32, 314 56, 298 86 C290 102, 294 120, 310 132 L322 140 L322 158 L378 158 L378 140 L390 132 C406 120, 410 102, 402 86 C386 56, 364 32, 350 12 Z"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M350 22 C338 40, 320 62, 306 88 C300 100, 303 114, 316 125 L328 134 L328 152 L372 152 L372 134 L384 125 C397 114, 400 100, 394 88 C380 62, 362 40, 350 22 Z"/>
+                        <path class="batik-draw-detail" stroke-width="1.1"
+                            d="M350 32 L350 132 M350 108 C336 102, 326 92, 322 80 M350 108 C364 102, 374 92, 378 80 M350 122 C334 118, 322 110, 316 102 M350 122 C366 118, 378 110, 384 102"/>
+                        <path class="batik-draw-detail" stroke-width="1.2"
+                            d="M335 158 L335 138 L365 138 L365 158 M344 158 L344 144 L356 144 L356 158"/>
+                    </g>
+
+                    <g class="batik-kawung-core" stroke="url(#goldBatikGrad)" stroke-width="1.6" fill="#18140d">
+                        <polygon points="350,48 357,57 350,66 343,57"/>
+                        <polygon points="350,78 357,87 350,96 343,87"/>
+                        <polygon points="328,72 337,65 346,72 337,79"/>
+                        <polygon points="372,72 363,65 354,72 363,79"/>
+                        <circle cx="350" cy="72" r="2.6" fill="#FFF0C2" stroke="none"/>
+                    </g>
+                </svg>
+            </div>
         </div>
     </div>
 
@@ -764,7 +769,7 @@
             preloader.style.opacity = '0';
             preloader.style.visibility = 'hidden';
         };
-        window.setTimeout(hidePreloader, 300);
+        window.setTimeout(hidePreloader, 4500);
 
         const hamburger = document.querySelector('.hamburger');
         const body = document.body;
