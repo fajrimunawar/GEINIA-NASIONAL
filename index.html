@@ -12,8 +12,8 @@
     <link rel="apple-touch-icon" href="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     <style>
         :root {
             --navy: #000000;
@@ -43,7 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK PARANG-KAWUNG GUNUNGAN DIPERBESAR & DIPERHALUS) --- */
+        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK PARANG-KAWUNG GUNUNGAN) --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -101,7 +101,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ORNAMEN BATIK EMAS (UKURAN LEBIH BESAR, PROPORSIONAL, DAN SANGAT MIRIP GAMBAR) --- */
         .batik-ornament-box {
             width: min(680px, 94vw);
             margin: 22px auto 0;
@@ -215,7 +214,6 @@
             text-transform: uppercase;
             letter-spacing: clamp(0px, 0.16vw, 2px);
             text-align: center;
-            overflow-wrap: normal;
         }
 
         .main-title span { color: var(--red); }
@@ -230,16 +228,16 @@
             margin-top: 8px;
             font-weight: 400;
             text-align: center;
-            overflow-wrap: break-word;
         }
 
-        /* --- NAVIGASI --- */
+        /* --- NAVIGASI & DESAIN SUB-MENU DROPDOWN YANG DIPERBAIKI --- */
         nav {
             border-bottom: 2px solid var(--navy);
-            background: #fff;
+            background: #ffffff;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
         }
 
         .nav-inner {
@@ -259,7 +257,7 @@
 
         .nav-link {
             display: block;
-            padding: 12px 4px;
+            padding: 14px 6px;
             text-decoration: none;
             color: var(--navy);
             font-size: clamp(0.66rem, 0.8vw, 0.78rem);
@@ -268,55 +266,69 @@
             text-align: center;
             line-height: 1.35;
             white-space: nowrap;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             cursor: pointer;
         }
 
         .nav-item:first-child .nav-link { padding-left: 0; }
         .nav-item:last-child .nav-link { padding-right: 0; }
-        .nav-item:hover .nav-link { color: var(--red); }
+        .nav-item:hover .nav-link { color: var(--color-gold); }
 
+        /* Tampilan Panel Dropdown yang Diperbarui (Elegan, Rapi, & Responsif Tempat) */
         .dropdown {
             position: absolute;
-            top: 100%;
-            left: 0;
+            top: calc(100% + 4px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
             z-index: 1100;
-            background-color: #fff;
-            min-width: min(250px, calc(100vw - 24px));
-            max-width: min(320px, calc(100vw - 24px));
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            min-width: 240px;
+            max-width: 300px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            border-radius: 8px;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
             border-top: 3px solid var(--color-gold);
+            padding: 6px 0;
         }
 
-        .nav-item:nth-last-child(-n+2) .dropdown { right: 0; left: auto; }
+        /* Penyesuaian otomatis agar menu di ujung kanan tidak terpotong layar */
+        .nav-item:nth-last-child(-n+3) .dropdown {
+            left: auto;
+            right: 0;
+            transform: translateY(8px);
+        }
 
         .nav-item.dropdown-active > .dropdown {
             opacity: 1;
             visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-item:nth-last-child(-n+3).dropdown-active > .dropdown {
             transform: translateY(0);
         }
 
         .dropdown a {
             display: block;
-            padding: 12px 20px;
+            padding: 11px 18px;
             text-decoration: none;
-            color: #333;
-            font-size: 0.85rem;
+            color: #2b2b2b;
+            font-size: 0.83rem;
             font-weight: 500;
             transition: all 0.2s ease;
-            border-bottom: 1px solid var(--light-gray);
+            border-bottom: 1px solid #f2f3f5;
         }
+        
         .dropdown a:last-child { border-bottom: none; }
 
         .dropdown a:hover {
-            background: var(--light-gray);
+            background: linear-gradient(90deg, #fcfbfa 0%, #f4f1ea 100%);
             color: var(--color-gold);
-            padding-left: 25px;
+            padding-left: 22px;
+            font-weight: 600;
         }
         
         .hamburger {
@@ -577,10 +589,13 @@
                 transition: max-height 0.3s ease;
                 right: auto;
                 left: auto;
+                border: none;
+                border-radius: 0;
+                padding: 0;
             }
             .nav-item.dropdown-active > .dropdown { max-height: 70vh; overflow-y: auto; }
             .dropdown a { padding-left: 40px; background-color: #fff; }
-            .dropdown a:hover { background-color: #f3f1eb; }
+            .dropdown a:hover { background-color: #f3f1eb; padding-left: 45px; }
             body::after {
                 content: '';
                 position: fixed;
@@ -649,7 +664,6 @@
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
             
-            <!-- ORNAMEN BATIK EMAS (DIKEMBANGKAN LEBIH BESAR & SANGAT PRESISI) -->
             <div class="batik-ornament-box" aria-hidden="true">
                 <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -666,7 +680,6 @@
                         </linearGradient>
                     </defs>
 
-                    <!-- SAYAP BATIK PARANG KIRI -->
                     <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
                         <path class="batik-draw-main" stroke-width="2.2" fill="url(#goldFillSoft)"
                             d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
@@ -690,7 +703,6 @@
                             d="M258 92 C242 92, 235 100, 243 106 C250 111, 260 106, 257 99"/>
                     </g>
 
-                    <!-- SAYAP BATIK PARANG KANAN (SIMETRIS) -->
                     <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(700, 0) scale(-1, 1)">
                         <path class="batik-draw-main" stroke-width="2.2" fill="url(#goldFillSoft)"
                             d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
@@ -714,7 +726,6 @@
                             d="M258 92 C242 92, 235 100, 243 106 C250 111, 260 106, 257 99"/>
                     </g>
 
-                    <!-- GUNUNGAN WAYANG & INTI KAWUNG DI TENGAH -->
                     <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
                         <path class="batik-draw-main" stroke-width="2.4" fill="#0d0c0a"
                             d="M350 10 C335 30, 312 55, 296 85 C288 101, 292 120, 308 132 L320 140 L320 160 L380 160 L380 140 L392 132 C408 120, 412 101, 404 85 C388 55, 365 30, 350 10 Z"/>
@@ -726,7 +737,6 @@
                             d="M333 160 L333 138 L367 138 L367 160 M342 160 L342 144 L358 144 L358 160"/>
                     </g>
 
-                    <!-- MOTIF INTI BATIK KAWUNG (4 KELOPAK KETUPAT EMAS DI TENGAH GUNUNGAN) -->
                     <g class="batik-kawung-core" stroke="url(#goldBatikGrad)" stroke-width="1.7" fill="#18140d">
                         <polygon points="350,46 358,56 350,66 342,56"/>
                         <polygon points="350,78 358,88 350,98 342,88"/>
@@ -904,7 +914,6 @@
             preloader.style.opacity = '0';
             preloader.style.visibility = 'hidden';
         };
-        // Durasi preloader tetap 4.5 detik sesuai ketentuan
         window.setTimeout(hidePreloader, 4500);
 
         const hamburger = document.querySelector('.hamburger');
