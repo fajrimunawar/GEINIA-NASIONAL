@@ -43,14 +43,14 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (4.5 DETIK) --- */
+        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK PARANG-KAWUNG GUNUNGAN) --- */
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #1c1c1c 0%, #000000 80%);
+            background: radial-gradient(circle at center, #141414 0%, #000000 85%);
             z-index: 99999;
             display: flex;
             flex-direction: column;
@@ -63,6 +63,9 @@
             text-align: center;
             position: relative;
             z-index: 2;
+            width: 100%;
+            max-width: 720px;
+            padding: 0 20px;
         }
 
         .loader-main-text {
@@ -96,6 +99,71 @@
 
         @keyframes textReveal {
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ORNAMEN BATIK EMAS (SESUAI VISUALISASI GAMBAR & WAKTU 4.5 DETIK) --- */
+        .batik-ornament-box {
+            width: min(560px, 90vw);
+            margin: 18px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(10px) scale(0.97);
+            animation: batikBoxReveal 0.9s ease-out 0.35s forwards;
+        }
+
+        .batik-svg {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.35));
+            animation: batikGoldGlow 3.6s ease-in-out 0.6s forwards;
+        }
+
+        .batik-draw-main {
+            stroke-dasharray: 1400;
+            stroke-dashoffset: 1400;
+            animation: drawBatikStroke 3.4s cubic-bezier(0.25, 0.85, 0.35, 1) 0.45s forwards;
+        }
+
+        .batik-draw-detail {
+            stroke-dasharray: 900;
+            stroke-dashoffset: 900;
+            animation: drawBatikStroke 3.1s cubic-bezier(0.25, 0.85, 0.35, 1) 0.75s forwards;
+        }
+
+        .batik-kawung-core {
+            opacity: 0;
+            transform-origin: 350px 72px;
+            transform: scale(0.7);
+            animation: coreBloom 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.3s forwards;
+        }
+
+        @keyframes batikBoxReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes drawBatikStroke {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes coreBloom {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes batikGoldGlow {
+            0% { filter: drop-shadow(0 0 4px rgba(197, 160, 89, 0.2)); }
+            65% { filter: drop-shadow(0 0 14px rgba(235, 198, 120, 0.65)); }
+            100% { filter: drop-shadow(0 0 18px rgba(245, 212, 138, 0.85)); }
         }
 
         /* --- HEADER SECTION (UKURAN LOGO KANAN & KIRI DIPERBESAR SEDIKIT) --- */
@@ -595,6 +663,106 @@
         <div class="loader-wrapper">
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
+            
+            <!-- ORNAMEN BATIK EMAS PARANG-KAWUNG & GUNUNGAN -->
+            <div class="batik-ornament-box" aria-hidden="true">
+                <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="goldBatikGrad" x1="20" y1="20" x2="680" y2="155" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#9A7634"/>
+                            <stop offset="25%" stop-color="#E7C87D"/>
+                            <stop offset="50%" stop-color="#FFF0C2"/>
+                            <stop offset="75%" stop-color="#E7C87D"/>
+                            <stop offset="100%" stop-color="#9A7634"/>
+                        </linearGradient>
+                        <linearGradient id="goldFillSoft" x1="350" y1="12" x2="350" y2="162" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#C5A059" stop-opacity="0.22"/>
+                            <stop offset="100%" stop-color="#7A5A20" stop-opacity="0.06"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- SAYAP BATIK PARANG KIRI -->
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Kontur Luar Sayap Parang Kiri -->
+                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
+                        <!-- Gelombang Parang Lapis 1 Kiri -->
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
+                        <path class="batik-draw-detail" stroke-width="1.4"
+                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
+                        <path class="batik-draw-detail" stroke-width="1.7"
+                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
+                        <!-- Ulir / Mlinjon Klasik Kiri -->
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M126 36 C114 36, 108 43, 114 48 C120 52, 128 48, 126 43"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M174 54 C160 54, 154 62, 161 67 C168 72, 177 67, 174 61"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M222 72 C206 72, 198 81, 206 87 C214 92, 224 87, 221 80"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M258 92 C242 92, 235 100, 243 106 C250 111, 260 106, 257 99"/>
+                    </g>
+
+                    <!-- SAYAP BATIK PARANG KANAN (SIMETRIS) -->
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(700, 0) scale(-1, 1)">
+                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
+                        <path class="batik-draw-detail" stroke-width="1.4"
+                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
+                        <path class="batik-draw-detail" stroke-width="1.7"
+                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M126 36 C114 36, 108 43, 114 48 C120 52, 128 48, 126 43"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M174 54 C160 54, 154 62, 161 67 C168 72, 177 67, 174 61"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M222 72 C206 72, 198 81, 206 87 C214 92, 224 87, 221 80"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M258 92 C242 92, 235 100, 243 106 C250 111, 260 106, 257 99"/>
+                    </g>
+
+                    <!-- GUNUNGAN WAYANG & INTI KAWUNG DI TENGAH -->
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Siluet Luar Gunungan -->
+                        <path class="batik-draw-main" stroke-width="2.3" fill="#0d0c0a"
+                            d="M350 12 C336 32, 314 56, 298 86 C290 102, 294 120, 310 132 L322 140 L322 158 L378 158 L378 140 L390 132 C406 120, 410 102, 402 86 C386 56, 364 32, 350 12 Z"/>
+                        <!-- Bingkai Dalam Gunungan -->
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M350 22 C338 40, 320 62, 306 88 C300 100, 303 114, 316 125 L328 134 L328 152 L372 152 L372 134 L384 125 C397 114, 400 100, 394 88 C380 62, 362 40, 350 22 Z"/>
+                        <!-- Sulur Api & Akar di Dalam Gunungan -->
+                        <path class="batik-draw-detail" stroke-width="1.1"
+                            d="M350 32 L350 132 M350 108 C336 102, 326 92, 322 80 M350 108 C364 102, 374 92, 378 80 M350 122 C334 118, 322 110, 316 102 M350 122 C366 118, 378 110, 384 102"/>
+                        <!-- Gapura Bawah Gunungan -->
+                        <path class="batik-draw-detail" stroke-width="1.2"
+                            d="M335 158 L335 138 L365 138 L365 158 M344 158 L344 144 L356 144 L356 158"/>
+                    </g>
+
+                    <!-- MOTIF INTI BATIK KAWUNG (4 KELOPAK KETUPAT EMAS DI TENGAH GUNUNGAN) -->
+                    <g class="batik-kawung-core" stroke="url(#goldBatikGrad)" stroke-width="1.6" fill="#18140d">
+                        <!-- Kelopak Atas -->
+                        <polygon points="350,48 357,57 350,66 343,57"/>
+                        <!-- Kelopak Bawah -->
+                        <polygon points="350,78 357,87 350,96 343,87"/>
+                        <!-- Kelopak Kiri -->
+                        <polygon points="328,72 337,65 346,72 337,79"/>
+                        <!-- Kelopak Kanan -->
+                        <polygon points="372,72 363,65 354,72 363,79"/>
+                        <!-- Titik Inti Tengah -->
+                        <circle cx="350" cy="72" r="2.6" fill="#FFF0C2" stroke="none"/>
+                    </g>
+                </svg>
+            </div>
         </div>
     </div>
 
