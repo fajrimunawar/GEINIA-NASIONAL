@@ -43,7 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK PARANG-KAWUNG GUNUNGAN DIPERBESAR & DIPERHALUS) --- */
+        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK) --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -101,7 +101,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ORNAMEN BATIK EMAS --- */
         .batik-ornament-box {
             width: min(680px, 94vw);
             margin: 22px auto 0;
@@ -215,7 +214,6 @@
             text-transform: uppercase;
             letter-spacing: clamp(0px, 0.16vw, 2px);
             text-align: center;
-            overflow-wrap: normal;
         }
 
         .main-title span { color: var(--red); }
@@ -230,10 +228,9 @@
             margin-top: 8px;
             font-weight: 400;
             text-align: center;
-            overflow-wrap: break-word;
         }
 
-        /* --- NAVIGASI & DESAIN SUB-MENU DROPDOWN YANG DIPERBARUI --- */
+        /* --- NAVIGASI & DESAIN BARU SUB-MENU DROPDOWN (MODERN DARK GLASS & GOLD) --- */
         nav {
             border-bottom: 2px solid var(--navy);
             background: #ffffff;
@@ -277,31 +274,30 @@
         .nav-item:last-child .nav-link { padding-right: 0; }
         .nav-item:hover .nav-link { color: var(--color-gold); }
 
-        /* TAMPILAN PANEL DROPDOWN / SUB-MENU YANG ELEGAN & RAPI */
+        /* DESAIN BARU SUB-MENU: KARTU ELEGAN BERLATAR GELAP DENGAN AKSEN EMAS */
         .dropdown {
             position: absolute;
-            top: calc(100% + 4px);
+            top: calc(100% + 6px);
             left: 50%;
-            transform: translateX(-50%) translateY(8px);
+            transform: translateX(-50%) translateY(12px);
             z-index: 1100;
-            background-color: #ffffff;
-            min-width: 250px;
-            max-width: 310px;
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.04);
+            background: linear-gradient(145deg, #161618 0%, #0d0e10 100%);
+            min-width: 270px;
+            max-width: 330px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(197, 160, 89, 0.25);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 10px;
-            border: 1px solid rgba(197, 160, 89, 0.22);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 12px;
             border-top: 3px solid var(--color-gold);
-            padding: 6px 0;
+            padding: 8px 0;
         }
 
-        /* Penyesuaian otomatis untuk menu di bagian kanan agar tidak terpotong layar */
+        /* Penyesuaian menu di ujung kanan agar tidak terpotong */
         .nav-item:nth-last-child(-n+3) .dropdown {
             left: auto;
             right: 0;
-            transform: translateY(8px);
+            transform: translateY(12px);
         }
 
         .nav-item.dropdown-active > .dropdown {
@@ -316,22 +312,40 @@
 
         .dropdown a {
             display: block;
-            padding: 11px 20px;
+            padding: 12px 20px;
             text-decoration: none;
-            color: #2b2b2b;
-            font-size: 0.83rem;
+            color: #d1d5db;
+            font-size: 0.84rem;
             font-weight: 500;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid #f2f3f5;
+            transition: all 0.25s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
         
         .dropdown a:last-child { border-bottom: none; }
 
         .dropdown a:hover {
-            background: linear-gradient(90deg, #fcfbfa 0%, #f4f1ea 100%);
+            background: rgba(197, 160, 89, 0.12);
             color: var(--color-gold);
-            padding-left: 25px;
+            padding-left: 26px;
             font-weight: 600;
+        }
+
+        .dropdown a::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 4px;
+            height: 4px;
+            background-color: var(--color-gold);
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown a:hover::before {
+            transform: translateY(-50%) scale(1);
         }
         
         .hamburger {
@@ -580,7 +594,7 @@
             }
             .dropdown {
                 position: static;
-                background-color: #fff;
+                background: #141416;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
@@ -597,8 +611,8 @@
                 padding: 0;
             }
             .nav-item.dropdown-active > .dropdown { max-height: 70vh; overflow-y: auto; }
-            .dropdown a { padding-left: 40px; background-color: #fff; }
-            .dropdown a:hover { background-color: #f3f1eb; padding-left: 45px; }
+            .dropdown a { padding-left: 35px; color: #d1d5db; }
+            .dropdown a:hover { background-color: rgba(197, 160, 89, 0.15); padding-left: 40px; color: var(--color-gold); }
             body::after {
                 content: '';
                 position: fixed;
