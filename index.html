@@ -43,7 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN PENJOR KIRI & KANAN BERHADAPAN) --- */
+        /* --- LOADING SCREEN (4.5 DETIK + BATIK TENGAH & PENJOR KIRI/KANAN SEJAJAR) --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -60,7 +60,6 @@
             overflow: hidden;
         }
 
-        /* Kontainer Utama Loading (Teks di Tengah) */
         .loader-wrapper {
             text-align: center;
             position: relative;
@@ -100,18 +99,70 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- PENJOR KIRI & KANAN (ESTETIK, BERWIBAWA, ELEGAN BERWARNA EMAS) --- */
+        /* --- ORNAMEN BATIK TENGAH (DIKEMBALIKAN UTUH & DISEMPURNAKAN) --- */
+        .batik-ornament-box {
+            width: min(460px, 85vw);
+            margin: 18px auto 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.95);
+            animation: batikBoxReveal 0.8s ease-out 0.35s forwards;
+            position: relative;
+            z-index: 3;
+        }
+
+        .batik-svg {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            filter: drop-shadow(0 0 12px rgba(197, 160, 89, 0.25));
+        }
+
+        .batik-draw-main {
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            animation: drawBatikStroke 3.2s cubic-bezier(0.25, 0.85, 0.35, 1) 0.4s forwards;
+        }
+
+        .batik-draw-detail {
+            stroke-dasharray: 800;
+            stroke-dashoffset: 800;
+            animation: drawBatikStroke 2.8s cubic-bezier(0.25, 0.85, 0.35, 1) 0.6s forwards;
+        }
+
+        .batik-kawung-core {
+            opacity: 0;
+            transform-origin: 350px 72px;
+            transform: scale(0.6);
+            animation: coreBloom 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s forwards;
+        }
+
+        @keyframes batikBoxReveal {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes drawBatikStroke {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes coreBloom {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- ORNAMEN PENJOR KIRI & KANAN (PROFESIONAL, BERWIBAWA, SEJAJAR DENGAN BATIK TENGAH) --- */
         .penjor-wrapper-left,
         .penjor-wrapper-right {
             position: absolute;
             bottom: 0;
-            width: clamp(140px, 22vw, 260px);
-            height: 85vh;
+            width: clamp(150px, 25vw, 300px);
+            height: 92vh;
             z-index: 2;
             pointer-events: none;
             display: flex;
             align-items: flex-end;
-            filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.2));
+            filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.3));
         }
 
         .penjor-wrapper-left {
@@ -136,33 +187,32 @@
             overflow: visible;
         }
 
-        /* Animasi Garis Mengalir (Stroke Drawing) yang Dinamis & Bervariasi */
         .penjor-path-main {
-            stroke-dasharray: 1800;
-            stroke-dashoffset: 1800;
-            animation: drawPenjorStroke 3.2s cubic-bezier(0.25, 0.85, 0.35, 1) 0.4s forwards;
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            animation: drawPenjorStroke 3.4s cubic-bezier(0.25, 0.85, 0.35, 1) 0.3s forwards;
         }
 
         .penjor-path-detail {
-            stroke-dasharray: 1200;
-            stroke-dashoffset: 1200;
-            animation: drawPenjorStroke 2.8s cubic-bezier(0.25, 0.85, 0.35, 1) 0.7s forwards;
+            stroke-dasharray: 1400;
+            stroke-dashoffset: 1400;
+            animation: drawPenjorStroke 3.0s cubic-bezier(0.25, 0.85, 0.35, 1) 0.5s forwards;
         }
 
         .penjor-ornament-bloom {
             opacity: 0;
             transform: scale(0.4);
             transform-origin: center;
-            animation: penjorBloom 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.4s forwards;
+            animation: penjorBloom 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s forwards;
         }
 
         @keyframes penjorSlideInLeft {
-            0% { opacity: 0; transform: translateX(-60px) scale(0.95); }
+            0% { opacity: 0; transform: translateX(-50px) scale(0.96); }
             100% { opacity: 1; transform: translateX(0) scale(1); }
         }
 
         @keyframes penjorSlideInRight {
-            0% { opacity: 0; transform: translateX(60px) scale(0.95); }
+            0% { opacity: 0; transform: translateX(50px) scale(0.96); }
             100% { opacity: 1; transform: translateX(0) scale(1); }
         }
 
@@ -199,7 +249,6 @@
             justify-content: flex-end;
         }
 
-        /* Ukuran kedua logo disetarakan agar seimbang proporsional */
         .logo-kiri img, .logo-kanan img { 
             width: 95px; 
             height: 95px;
@@ -557,57 +606,58 @@
 </head>
 <body>
     <div id="preloader">
-        <!-- ORNAMEN PENJOR KIRI (Menghadap ke Kanan/Dalam) -->
+        <!-- ORNAMEN PENJOR KIRI (Menghadap Kanan/Dalam - Sejajar Bawah Bersama Batik) -->
         <div class="penjor-wrapper-left" aria-hidden="true">
-            <svg class="penjor-svg" viewBox="0 0 200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="penjor-svg" viewBox="0 0 220 750" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="goldPenjorGrad" x1="0" y1="0" x2="200" y2="700" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#E7C87D"/>
-                        <stop offset="50%" stop-color="#C5A059"/>
+                    <linearGradient id="goldPenjorGrad" x1="0" y1="0" x2="220" y2="750" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#FFF0C2"/>
+                        <stop offset="30%" stop-color="#E7C87D"/>
+                        <stop offset="70%" stop-color="#C5A059"/>
                         <stop offset="100%" stop-color="#7A5A20"/>
                     </linearGradient>
-                    <linearGradient id="goldSoftFill" x1="0" y1="0" x2="200" y2="700" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#C5A059" stop-opacity="0.18"/>
+                    <linearGradient id="goldSoftFill" x1="0" y1="0" x2="220" y2="750" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#C5A059" stop-opacity="0.2"/>
                         <stop offset="100%" stop-color="#000000" stop-opacity="0.02"/>
                     </linearGradient>
                 </defs>
                 <g stroke="url(#goldPenjorGrad)" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Batang Utama & Lengkungan Indah Penjor Kiri -->
-                    <path class="penjor-path-main" stroke-width="3.5" fill="url(#goldSoftFill)"
-                        d="M20 700 C30 500, 50 350, 90 200 C110 120, 140 60, 180 20 C160 40, 130 90, 110 160 C80 260, 60 420, 45 700 Z"/>
-                    <!-- Detail Ukiran / Janur & Reraitan Melengkung -->
+                    <!-- Batang Utama Penjor Kiri Menghadap ke Kanan -->
+                    <path class="penjor-path-main" stroke-width="3.2" fill="url(#goldSoftFill)"
+                        d="M25 750 C35 530, 60 380, 105 210 C125 130, 155 60, 195 20 C175 42, 145 95, 125 170 C95 280, 75 450, 52 750 Z"/>
+                    <!-- Detail Janur & Hiasan Melengkung Berwibawa -->
                     <path class="penjor-path-detail" stroke-width="1.8"
-                        d="M72 260 C100 240, 130 200, 150 150 M60 330 C90 300, 120 250, 140 190 M52 400 C80 370, 110 320, 130 260 M45 480 C75 440, 100 380, 120 320"/>
-                    <path class="penjor-path-detail" stroke-width="1.5"
-                        d="M82 210 C105 180, 125 140, 140 90 M66 300 C92 265, 115 220, 132 170"/>
+                        d="M84 270 C112 250, 145 210, 165 160 M70 350, 100 320, 135 260, 155 200 M60 430 C90 395, 125 340, 148 275 M52 520 C82 475, 115 410, 138 340"/>
+                    <path class="penjor-path-detail" stroke-width="1.4"
+                        d="M95 220 C120 190, 142 150, 158 98 M78 315 C106 280, 132 235, 150 180"/>
                 </g>
-                <!-- Ornamen Puncak & Sampiran Berbunga Emas -->
+                <!-- Puncak Penjor Berbunga Emas Elegan -->
                 <g class="penjor-ornament-bloom" stroke="url(#goldPenjorGrad)" stroke-width="1.8" fill="#141414">
-                    <path d="M180 20 C185 35, 175 50, 160 55 C145 50, 140 35, 150 20 Z"/>
-                    <circle cx="160" cy="38" r="4" fill="#FFF0C2" stroke="none"/>
-                    <path d="M150 55 C135 65, 120 60, 110 45 C120 30, 135 35, 150 55 Z" fill="url(#goldSoftFill)"/>
+                    <path d="M195 20 C202 38, 190 55, 172 60 C155 55, 148 38, 158 20 Z"/>
+                    <circle cx="172" cy="40" r="4.2" fill="#FFF0C2" stroke="none"/>
+                    <path d="M158 60 C142 70, 125 65, 115 48 C125 32, 142 38, 158 60 Z" fill="url(#goldSoftFill)"/>
                 </g>
             </svg>
         </div>
 
-        <!-- ORNAMEN PENJOR KANAN (Menghadap ke Kiri/Dalam - Dicerminkan Sempurna) -->
+        <!-- ORNAMEN PENJOR KANAN (Menghadap Kiri/Dalam - Dicerminkan Sempurna & Sejajar) -->
         <div class="penjor-wrapper-right" aria-hidden="true">
-            <svg class="penjor-svg" viewBox="0 0 200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g stroke="url(#goldPenjorGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(200, 0) scale(-1, 1)">
-                    <!-- Batang Utama & Lengkungan Indah Penjor Kanan -->
-                    <path class="penjor-path-main" stroke-width="3.5" fill="url(#goldSoftFill)"
-                        d="M20 700 C30 500, 50 350, 90 200 C110 120, 140 60, 180 20 C160 40, 130 90, 110 160 C80 260, 60 420, 45 700 Z"/>
-                    <!-- Detail Ukiran / Janur & Reraitan Melengkung -->
+            <svg class="penjor-svg" viewBox="0 0 220 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="url(#goldPenjorGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(220, 0) scale(-1, 1)">
+                    <!-- Batang Utama Penjor Kanan Menghadap ke Kiri -->
+                    <path class="penjor-path-main" stroke-width="3.2" fill="url(#goldSoftFill)"
+                        d="M25 750 C35 530, 60 380, 105 210 C125 130, 155 60, 195 20 C175 42, 145 95, 125 170 C95 280, 75 450, 52 750 Z"/>
+                    <!-- Detail Janur & Hiasan Melengkung Berwibawa -->
                     <path class="penjor-path-detail" stroke-width="1.8"
-                        d="M72 260 C100 240, 130 200, 150 150 M60 330 C90 300, 120 250, 140 190 M52 400 C80 370, 110 320, 130 260 M45 480 C75 440, 100 380, 120 320"/>
-                    <path class="penjor-path-detail" stroke-width="1.5"
-                        d="M82 210 C105 180, 125 140, 140 90 M66 300 C92 265, 115 220, 132 170"/>
+                        d="M84 270 C112 250, 145 210, 165 160 M70 350, 100 320, 135 260, 155 200 M60 430 C90 395, 125 340, 148 275 M52 520 C82 475, 115 410, 138 340"/>
+                    <path class="penjor-path-detail" stroke-width="1.4"
+                        d="M95 220 C120 190, 142 150, 158 98 M78 315 C106 280, 132 235, 150 180"/>
                 </g>
-                <!-- Ornamen Puncak & Sampiran Berbunga Emas -->
-                <g class="penjor-ornament-bloom" stroke="url(#goldPenjorGrad)" stroke-width="1.8" fill="#141414" transform="translate(200, 0) scale(-1, 1)">
-                    <path d="M180 20 C185 35, 175 50, 160 55 C145 50, 140 35, 150 20 Z"/>
-                    <circle cx="160" cy="38" r="4" fill="#FFF0C2" stroke="none"/>
-                    <path d="M150 55 C135 65, 120 60, 110 45 C120 30, 135 35, 150 55 Z" fill="url(#goldSoftFill)"/>
+                <!-- Puncak Penjor Berbunga Emas Elegan -->
+                <g class="penjor-ornament-bloom" stroke="url(#goldPenjorGrad)" stroke-width="1.8" fill="#141414" transform="translate(220, 0) scale(-1, 1)">
+                    <path d="M195 20 C202 38, 190 55, 172 60 C155 55, 148 38, 158 20 Z"/>
+                    <circle cx="172" cy="40" r="4.2" fill="#FFF0C2" stroke="none"/>
+                    <path d="M158 60 C142 70, 125 65, 115 48 C125 32, 142 38, 158 60 Z" fill="url(#goldSoftFill)"/>
                 </g>
             </svg>
         </div>
@@ -615,6 +665,74 @@
         <div class="loader-wrapper">
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
+            
+            <!-- ORNAMEN BATIK TENGAH (DIKEMBALIKAN UTUH & DISEMPURNAKAN) -->
+            <div class="batik-ornament-box" aria-hidden="true">
+                <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="goldBatikGrad" x1="20" y1="20" x2="680" y2="155" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#9A7634"/>
+                            <stop offset="25%" stop-color="#E7C87D"/>
+                            <stop offset="50%" stop-color="#FFF0C2"/>
+                            <stop offset="75%" stop-color="#E7C87D"/>
+                            <stop offset="100%" stop-color="#9A7634"/>
+                        </linearGradient>
+                        <linearGradient id="goldFillSoft" x1="350" y1="12" x2="350" y2="162" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#C5A059" stop-opacity="0.22"/>
+                            <stop offset="100%" stop-color="#7A5A20" stop-opacity="0.06"/>
+                        </linearGradient>
+                    </defs>
+
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
+                        <path class="batik-draw-detail" stroke-width="1.4"
+                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
+                        <path class="batik-draw-detail" stroke-width="1.7"
+                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
+                    </g>
+
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(700, 0) scale(-1, 1)">
+                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
+                        <path class="batik-draw-detail" stroke-width="1.5"
+                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
+                        <path class="batik-draw-detail" stroke-width="1.4"
+                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
+                        <path class="batik-draw-detail" stroke-width="1.7"
+                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
+                    </g>
+
+                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="batik-draw-main" stroke-width="2.3" fill="#0d0c0a"
+                            d="M350 12 C336 32, 314 56, 298 86 C290 102, 294 120, 310 132 L322 140 L322 158 L378 158 L378 140 L390 132 C406 120, 410 102, 402 86 C386 56, 364 32, 350 12 Z"/>
+                        <path class="batik-draw-detail" stroke-width="1.3"
+                            d="M350 22 C338 40, 320 62, 306 88 C300 100, 303 114, 316 125 L328 134 L328 152 L372 152 L372 134 L384 125 C397 114, 400 100, 394 88 C380 62, 362 40, 350 22 Z"/>
+                        <path class="batik-draw-detail" stroke-width="1.1"
+                            d="M350 32 L350 132 M350 108 C336 102, 326 92, 322 80 M350 108 C364 102, 374 92, 378 80 M350 122 C334 118, 322 110, 316 102 M350 122 C366 118, 378 110, 384 102"/>
+                        <path class="batik-draw-detail" stroke-width="1.2"
+                            d="M335 158 L335 138 L365 138 L365 158 M344 158 L344 144 L356 144 L356 158"/>
+                    </g>
+
+                    <g class="batik-kawung-core" stroke="url(#goldBatikGrad)" stroke-width="1.6" fill="#18140d">
+                        <polygon points="350,48 357,57 350,66 343,57"/>
+                        <polygon points="350,78 357,87 350,96 343,87"/>
+                        <polygon points="328,72 337,65 346,72 337,79"/>
+                        <polygon points="372,72 363,65 354,72 363,79"/>
+                        <circle cx="350" cy="72" r="2.6" fill="#FFF0C2" stroke="none"/>
+                    </g>
+                </svg>
+            </div>
         </div>
     </div>
 
