@@ -140,15 +140,23 @@
         }
 
         @keyframes batikBoxReveal {
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         @keyframes drawBatikStroke {
-            to { stroke-dashoffset: 0; }
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         @keyframes coreBloom {
-            to { opacity: 1; transform: scale(1); }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         @keyframes batikGoldGlow {
@@ -168,8 +176,20 @@
             margin: 0 auto;
         }
 
-        .logo-kiri { width: 100%; display: flex; align-items: center; justify-content: flex-start; }
-        .logo-kanan { width: 100%; display: flex; align-items: center; justify-content: flex-end; }
+        .logo-kiri {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .logo-kanan {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
         .logo-kiri img, .logo-kanan img { 
             width: 100%; 
             height: clamp(74px, 11vw, 146px);
@@ -210,7 +230,7 @@
             text-align: center;
         }
 
-        /* --- NAVIGASI & PENYESUAIAN POSISI SUB-MENU RAPI --- */
+        /* --- NAVIGASI & DESAIN BARU SUB-MENU DROPDOWN (MODERN DARK GLASS & GOLD) --- */
         nav {
             border-bottom: 2px solid var(--navy);
             background: #ffffff;
@@ -228,7 +248,6 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            position: relative;
         }
 
         .nav-item {
@@ -255,57 +274,78 @@
         .nav-item:last-child .nav-link { padding-right: 0; }
         .nav-item:hover .nav-link { color: var(--color-gold); }
 
-        /* KARTU SUB-MENU YANG MENYESUAIKAN POSISI DI BAWAH MASING-MASING MENU UTAMA */
+        /* DESAIN BARU SUB-MENU: KARTU ELEGAN BERLATAR GELAP DENGAN AKSEN EMAS */
         .dropdown {
             position: absolute;
-            top: calc(100% + 2px);
-            left: 0;
+            top: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%) translateY(12px);
             z-index: 1100;
-            background: linear-gradient(145deg, #111215 0%, #1a1b20 100%);
-            min-width: 240px;
-            max-width: 280px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(197, 160, 89, 0.25);
+            background: linear-gradient(145deg, #161618 0%, #0d0e10 100%);
+            min-width: 270px;
+            max-width: 330px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(197, 160, 89, 0.25);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(8px);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 12px;
             border-top: 3px solid var(--color-gold);
-            padding: 6px 0;
+            padding: 8px 0;
         }
 
-        /* Penyesuaian khusus untuk menu-menu di bagian tengah/kanan agar posisinya sejajar rapi dan tidak keluar layar */
-        .nav-item:nth-child(n+5) .dropdown {
+        /* Penyesuaian menu di ujung kanan agar tidak terpotong */
+        .nav-item:nth-last-child(-n+3) .dropdown {
             left: auto;
             right: 0;
+            transform: translateY(12px);
         }
 
         .nav-item.dropdown-active > .dropdown {
             opacity: 1;
             visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-item:nth-last-child(-n+3).dropdown-active > .dropdown {
             transform: translateY(0);
         }
 
         .dropdown a {
             display: block;
-            padding: 11px 18px;
+            padding: 12px 20px;
             text-decoration: none;
             color: #d1d5db;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             font-weight: 500;
-            line-height: 1.4;
+            transition: all 0.25s ease;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.2s ease;
-            text-align: left;
+            position: relative;
         }
         
         .dropdown a:last-child { border-bottom: none; }
 
         .dropdown a:hover {
-            background: rgba(197, 160, 89, 0.15);
+            background: rgba(197, 160, 89, 0.12);
             color: var(--color-gold);
-            padding-left: 23px;
+            padding-left: 26px;
             font-weight: 600;
+        }
+
+        .dropdown a::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 4px;
+            height: 4px;
+            background-color: var(--color-gold);
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+
+        .dropdown a:hover::before {
+            transform: translateY(-50%) scale(1);
         }
         
         .hamburger {
@@ -360,8 +400,21 @@
             margin-bottom: 20px;
         }
 
-        .footer-brand-logo { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
-        .footer-brand-titles { display: flex; flex-direction: column; align-items: flex-start; text-align: left; min-width: 0; }
+        .footer-brand-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .footer-brand-titles {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 0;
+        }
+
         .footer-brand h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.35rem, 2vw, 1.65rem);
@@ -382,7 +435,12 @@
             text-align: left;
         }
         
-        .footer-brand p { font-size: 0.9rem; color: #aaaaaa; line-height: 1.7; text-align: justify; }
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            line-height: 1.7;
+            text-align: justify;
+        }
 
         .footer-section h3 {
             font-family: 'Inter', sans-serif;
@@ -407,15 +465,46 @@
         }
 
         .contact-list { list-style: none; padding: 0; }
-        .contact-list li { margin-bottom: 20px; display: flex; align-items: flex-start; }
-        .contact-list li i { color: var(--color-gold); margin-right: 15px; margin-top: 4px; font-size: 1.1rem; }
-        .contact-list li p { margin: 0; font-size: 0.9rem; color: #cccccc; line-height: 1.5; text-align: left; }
-        .contact-list li p a { color: #cccccc; text-decoration: none; transition: color 0.3s ease; }
+        .contact-list li { 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: flex-start; 
+        }
+        .contact-list li i {
+            color: var(--color-gold);
+            margin-right: 15px;
+            margin-top: 4px;
+            font-size: 1.1rem;
+        }
+        .contact-list li p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #cccccc;
+            line-height: 1.5;
+            text-align: left;
+        }
+        .contact-list li p a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
         .contact-list li p a:hover { color: var(--color-gold); }
 
-        .footer-section > p.media-text { color: #aaaaaa; font-size: 0.9rem; margin-bottom: 20px; text-align: justify; }
+        .footer-section > p.media-text {
+            color: #aaaaaa; 
+            font-size: 0.9rem; 
+            margin-bottom: 20px; 
+            text-align: justify; 
+        }
 
-        .social-links { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
         .social-links a {
             display: flex;
             align-items: center;
@@ -436,7 +525,11 @@
             box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
         }
 
-        .social-links a img.custom-icon { width: 22px; height: 22px; object-fit: contain; }
+        .social-links a img.custom-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
 
         @media (max-width: 1100px) {
             .content-area { flex: 0 0 auto; }
@@ -445,9 +538,15 @@
                 grid-template-columns: clamp(64px, 9vw, 100px) minmax(0, 1fr) clamp(64px, 9vw, 100px);
                 gap: clamp(8px, 1.4vw, 16px);
             }
-            .logo-kiri img, .logo-kanan img { height: clamp(64px, 9vw, 96px); max-height: 96px; }
+            .logo-kiri img, .logo-kanan img {
+                height: clamp(64px, 9vw, 96px);
+                max-height: 96px;
+            }
             .main-title { font-size: clamp(1.65rem, 4.5vw, 2.8rem); }
-            .tagline { font-size: clamp(0.56rem, 1vw, 0.72rem); letter-spacing: clamp(0.3px, 0.15vw, 1.2px); }
+            .tagline {
+                font-size: clamp(0.56rem, 1vw, 0.72rem);
+                letter-spacing: clamp(0.3px, 0.15vw, 1.2px);
+            }
             nav { min-height: 48px; }
             .hamburger {
                 display: flex;
@@ -537,9 +636,16 @@
                 gap: clamp(6px, 1.8vw, 12px);
                 padding: 10px clamp(8px, 2.5vw, 16px);
             }
-            .logo-kiri img, .logo-kanan img { height: clamp(50px, 10vw, 72px); max-height: 72px; }
+            .logo-kiri img, .logo-kanan img {
+                height: clamp(50px, 10vw, 72px);
+                max-height: 72px;
+            }
             .main-title { font-size: clamp(1.15rem, 4.8vw, 2rem); }
-            .tagline { font-size: clamp(0.5rem, 1.5vw, 0.68rem); letter-spacing: clamp(0.2px, 0.18vw, 1px); margin-top: 6px; }
+            .tagline {
+                font-size: clamp(0.5rem, 1.5vw, 0.68rem);
+                letter-spacing: clamp(0.2px, 0.18vw, 1px);
+                margin-top: 6px;
+            }
             .main-footer { padding: 36px 18px 24px; }
             .footer-brand p, .footer-section > p.media-text { text-align: left; }
             .contact-list li { min-width: 0; }
