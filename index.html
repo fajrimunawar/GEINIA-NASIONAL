@@ -12,16 +12,24 @@
     <link rel="apple-touch-icon" href="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     <style>
         :root {
-            --navy: #000000;
-            --red: #000000;
-            --gray: #000000;
-            --border: #e0e0e0;
-            --light-gray: #f8f9fa;
+            --bg-main: #ffffff;
+            --text-main: #000000;
+            --nav-bg: #ffffff;
+            --border-color: #e0e0e0;
             --color-gold: #C5A059;
+            --header-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-main: #0b0c10;
+            --text-main: #f3f4f6;
+            --nav-bg: #121316;
+            --border-color: #27272a;
+            --header-bg: #0f1013;
         }
 
         * {
@@ -30,12 +38,13 @@
             box-sizing: border-box;
             -webkit-user-select: none;
             user-select: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: var(--navy);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             min-height: 100vh;
             min-height: 100svh;
             display: flex;
@@ -43,7 +52,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK PARANG-KAWUNG GUNUNGAN) --- */
+        /* --- LOADING SCREEN --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -64,19 +73,19 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 720px;
+            max-width: 860px;
             padding: 0 20px;
         }
 
         .loader-main-text {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 8vw, 3.5rem);
+            font-size: clamp(2rem, 8.5vw, 3.8rem);
             font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 1vw, 5px);
+            letter-spacing: clamp(1px, 1.2vw, 5px);
             line-height: 1.15;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
             opacity: 0;
             transform: translateY(30px);
             animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -84,14 +93,14 @@
 
         .loader-sub-text {
             font-family: 'Inter', sans-serif;
-            font-size: clamp(0.7rem, 3vw, 1rem);
+            font-size: clamp(0.75rem, 3.2vw, 1.05rem);
             font-weight: 600;
             color: var(--color-gold);
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 0.8vw, 4px);
+            letter-spacing: clamp(1px, 0.9vw, 4px);
             line-height: 1.5;
             padding: 0 16px;
-            margin-top: 10px;
+            margin-top: 12px;
             opacity: 0;
             transform: translateY(20px);
             animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
@@ -101,10 +110,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ORNAMEN BATIK EMAS (SESUAI VISUALISASI GAMBAR & WAKTU 4.5 DETIK) --- */
         .batik-ornament-box {
-            width: min(560px, 90vw);
-            margin: 18px auto 0;
+            width: min(680px, 94vw);
+            margin: 22px auto 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -117,7 +125,7 @@
             width: 100%;
             height: auto;
             overflow: visible;
-            filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.35));
+            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
             animation: batikGoldGlow 3.6s ease-in-out 0.6s forwards;
         }
 
@@ -141,32 +149,85 @@
         }
 
         @keyframes batikBoxReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes drawBatikStroke {
-            to {
-                stroke-dashoffset: 0;
-            }
+            to { stroke-dashoffset: 0; }
         }
 
         @keyframes coreBloom {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes batikGoldGlow {
             0% { filter: drop-shadow(0 0 4px rgba(197, 160, 89, 0.2)); }
-            65% { filter: drop-shadow(0 0 14px rgba(235, 198, 120, 0.65)); }
-            100% { filter: drop-shadow(0 0 18px rgba(245, 212, 138, 0.85)); }
+            65% { filter: drop-shadow(0 0 16px rgba(235, 198, 120, 0.7)); }
+            100% { filter: drop-shadow(0 0 22px rgba(245, 212, 138, 0.9)); }
         }
 
-        /* --- HEADER SECTION (UKURAN LOGO KANAN & KIRI DIPERBESAR SEDIKIT) --- */
+        /* --- LIVE SYSTEM STATUS BAR & UTILITY TOP BAR --- */
+        .system-top-bar {
+            background: linear-gradient(90deg, #0d0e10 0%, #1a1b20 100%);
+            color: #d1d5db;
+            font-size: 0.72rem;
+            padding: 6px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .system-status-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            display: inline-block;
+            animation: pulseDot 2s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 12px #10b981; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            color: var(--color-gold);
+            padding: 3px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--color-gold);
+            color: #000;
+        }
+
+        /* --- HEADER SECTION --- */
         .header-container {
             display: grid;
             grid-template-columns: clamp(76px, 11vw, 155px) minmax(0, 1fr) clamp(76px, 11vw, 155px);
@@ -175,22 +236,11 @@
             gap: clamp(8px, 1.5vw, 22px);
             max-width: 1380px;
             margin: 0 auto;
+            background-color: var(--header-bg);
         }
 
-        .logo-kiri {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .logo-kanan {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
+        .logo-kiri { width: 100%; display: flex; align-items: center; justify-content: flex-start; }
+        .logo-kanan { width: 100%; display: flex; align-items: center; justify-content: flex-end; }
         .logo-kiri img, .logo-kanan img { 
             width: 100%; 
             height: clamp(74px, 11vw, 146px);
@@ -215,31 +265,32 @@
             text-transform: uppercase;
             letter-spacing: clamp(0px, 0.16vw, 2px);
             text-align: center;
-            overflow-wrap: normal;
+            color: var(--text-main);
         }
 
-        .main-title span { color: var(--red); }
+        .main-title span { color: var(--color-gold); }
 
         .tagline {
             max-width: 100%;
             font-size: clamp(0.52rem, 0.95vw, 0.82rem);
             line-height: 1.6;
             letter-spacing: clamp(0.25px, 0.16vw, 2px);
-            color: var(--gray);
+            color: var(--text-main);
+            opacity: 0.8;
             text-transform: uppercase;
             margin-top: 8px;
             font-weight: 400;
             text-align: center;
-            overflow-wrap: break-word;
         }
 
-        /* --- NAVIGASI --- */
+        /* --- NAVIGASI & MEGA MENU GRID PRESISI --- */
         nav {
-            border-bottom: 2px solid var(--navy);
-            background: #fff;
+            border-bottom: 2px solid var(--border-color);
+            background: var(--nav-bg);
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .nav-inner {
@@ -259,47 +310,50 @@
 
         .nav-link {
             display: block;
-            padding: 12px 4px;
+            padding: 14px 6px;
             text-decoration: none;
-            color: var(--navy);
+            color: var(--text-main);
             font-size: clamp(0.66rem, 0.8vw, 0.78rem);
             font-weight: 700;
             text-transform: uppercase;
             text-align: center;
             line-height: 1.35;
             white-space: nowrap;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             cursor: pointer;
         }
 
-        .nav-item:first-child .nav-link {
-            padding-left: 0;
-        }
+        .nav-item:first-child .nav-link { padding-left: 0; }
+        .nav-item:last-child .nav-link { padding-right: 0; }
+        .nav-item:hover .nav-link { color: var(--color-gold); }
 
-        .nav-item:last-child .nav-link {
-            padding-right: 0;
-        }
-
-        .nav-item:hover .nav-link { color: var(--red); }
-
+        /* MEGA MENU KARTU ELEGAN DENGAN GLASSMORPHISM & GOLD BORDER GLOW */
         .dropdown {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 4px);
             left: 0;
             z-index: 1100;
-            background-color: #fff;
-            min-width: min(250px, calc(100vw - 24px));
-            max-width: min(320px, calc(100vw - 24px));
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(13, 14, 16, 0.95) 0%, rgba(24, 25, 29, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            width: 380px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(197, 160, 89, 0.35);
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            border-top: 3px solid var(--color-gold);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 12px;
+            border-top: 4px solid var(--color-gold);
+            padding: 12px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
         }
 
-        .nav-item:nth-last-child(-n+2) .dropdown { right: 0; left: auto; }
+        .nav-item:nth-child(n+5) .dropdown {
+            left: auto;
+            right: 0;
+        }
 
         .nav-item.dropdown-active > .dropdown {
             opacity: 1;
@@ -308,21 +362,28 @@
         }
 
         .dropdown a {
-            display: block;
-            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
             text-decoration: none;
-            color: #333;
-            font-size: 0.85rem;
+            color: #e5e7eb;
+            font-size: 0.76rem;
             font-weight: 500;
+            line-height: 1.3;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
             transition: all 0.2s ease;
-            border-bottom: 1px solid var(--light-gray);
+            text-align: left;
         }
-        .dropdown a:last-child { border-bottom: none; }
 
         .dropdown a:hover {
-            background: var(--light-gray);
-            color: var(--color-gold);
-            padding-left: 25px;
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.25) 0%, rgba(197, 160, 89, 0.1) 100%);
+            border-color: var(--color-gold);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+            font-weight: 600;
         }
         
         .hamburger {
@@ -339,23 +400,102 @@
             display: block;
             width: 25px;
             height: 3px;
-            background-color: var(--navy);
+            background-color: var(--text-main);
             margin: 5px 0;
             transition: 0.3s;
         }
 
-        .content-area { flex: 1 0 auto; }
-        .content-area > .container { padding-block: 0; }
+        /* --- QUICK SEARCH MODAL --- */
+        .search-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 100px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
 
+        .search-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-modal-box {
+            background: #141519;
+            border: 1px solid var(--color-gold);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        .search-modal-overlay.active .search-modal-box {
+            transform: translateY(0);
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--color-gold);
+            padding-bottom: 8px;
+            gap: 10px;
+        }
+
+        .search-input-wrapper i {
+            color: var(--color-gold);
+            font-size: 1.1rem;
+        }
+
+        .search-input-wrapper input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-suggestions {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .search-suggestion-item {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .search-suggestion-item:hover {
+            background: rgba(197, 160, 89, 0.15);
+            color: var(--color-gold);
+        }
+
+        .content-area { flex: 1 0 auto; }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* ==========================================================================
-           FOOTER UTAMA
-           ========================================================================== */
+        /* --- FOOTER UTAMA --- */
         .main-footer {
             background-color: #0f1012;
             color: #ffffff;
@@ -371,9 +511,7 @@
             gap: clamp(24px, 4vw, 50px);
         }
 
-        .footer-section {
-            min-width: 0;
-        }
+        .footer-section { min-width: 0; }
 
         .footer-brand-header {
             display: flex;
@@ -383,21 +521,8 @@
             margin-bottom: 20px;
         }
 
-        .footer-brand-logo {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
-
-        .footer-brand-titles {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            min-width: 0;
-        }
-
+        .footer-brand-logo { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; }
+        .footer-brand-titles { display: flex; flex-direction: column; align-items: flex-start; text-align: left; min-width: 0; }
         .footer-brand h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.35rem, 2vw, 1.65rem);
@@ -414,17 +539,11 @@
             color: var(--color-gold);
             text-transform: uppercase;
             letter-spacing: 2.2px;
-            margin-bottom: 0;
             font-weight: 600;
             text-align: left;
         }
         
-        .footer-brand p {
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            line-height: 1.7;
-            text-align: justify;
-        }
+        .footer-brand p { font-size: 0.9rem; color: #aaaaaa; line-height: 1.7; text-align: justify; }
 
         .footer-section h3 {
             font-family: 'Inter', sans-serif;
@@ -449,46 +568,15 @@
         }
 
         .contact-list { list-style: none; padding: 0; }
-        .contact-list li { 
-            margin-bottom: 20px; 
-            display: flex; 
-            align-items: flex-start; 
-        }
-        .contact-list li i {
-            color: var(--color-gold);
-            margin-right: 15px;
-            margin-top: 4px;
-            font-size: 1.1rem;
-        }
-        .contact-list li p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #cccccc;
-            line-height: 1.5;
-            text-align: left;
-        }
-        .contact-list li p a {
-            color: #cccccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+        .contact-list li { margin-bottom: 20px; display: flex; align-items: flex-start; }
+        .contact-list li i { color: var(--color-gold); margin-right: 15px; margin-top: 4px; font-size: 1.1rem; }
+        .contact-list li p { margin: 0; font-size: 0.9rem; color: #cccccc; line-height: 1.5; text-align: left; }
+        .contact-list li p a { color: #cccccc; text-decoration: none; transition: color 0.3s ease; }
         .contact-list li p a:hover { color: var(--color-gold); }
 
-        .footer-section > p.media-text {
-            color: #aaaaaa; 
-            font-size: 0.9rem; 
-            margin-bottom: 20px; 
-            text-align: justify; 
-        }
+        .footer-section > p.media-text { color: #aaaaaa; font-size: 0.9rem; margin-bottom: 20px; text-align: justify; }
 
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-            justify-content: center;
-        }
-
+        .social-links { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px; justify-content: center; }
         .social-links a {
             display: flex;
             align-items: center;
@@ -509,11 +597,7 @@
             box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
         }
 
-        .social-links a img.custom-icon {
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-        }
+        .social-links a img.custom-icon { width: 22px; height: 22px; object-fit: contain; }
 
         @media (max-width: 1100px) {
             .content-area { flex: 0 0 auto; }
@@ -522,18 +606,12 @@
                 grid-template-columns: clamp(64px, 9vw, 100px) minmax(0, 1fr) clamp(64px, 9vw, 100px);
                 gap: clamp(8px, 1.4vw, 16px);
             }
-            .logo-kiri img, .logo-kanan img {
-                height: clamp(64px, 9vw, 96px);
-                max-height: 96px;
-            }
+            .logo-kiri img, .logo-kanan img { height: clamp(64px, 9vw, 96px); max-height: 96px; }
             .main-title { font-size: clamp(1.65rem, 4.5vw, 2.8rem); }
-            .tagline {
-                font-size: clamp(0.56rem, 1vw, 0.72rem);
-                letter-spacing: clamp(0.3px, 0.15vw, 1.2px);
-            }
+            .tagline { font-size: clamp(0.56rem, 1vw, 0.72rem); letter-spacing: clamp(0.3px, 0.15vw, 1.2px); }
             nav { min-height: 48px; }
             .hamburger {
-                display: block;
+                display: flex;
                 top: 0;
                 right: clamp(12px, 4vw, 24px);
                 width: 48px;
@@ -541,8 +619,6 @@
                 padding: 6px;
                 border: 0;
                 background: transparent;
-                transform: none;
-                display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -554,7 +630,7 @@
                 width: min(82vw, 320px);
                 height: 100vh;
                 height: 100dvh;
-                background-color: white;
+                background-color: var(--nav-bg);
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -569,7 +645,7 @@
                 z-index: 1000;
             }
             body.nav-active .nav-inner { transform: translateX(0); }
-            .nav-item { width: 100%; border-bottom: 1px solid var(--border); }
+            .nav-item { width: 100%; border-bottom: 1px solid var(--border-color); }
             .nav-link,
             .nav-item:first-child .nav-link,
             .nav-item:last-child .nav-link {
@@ -580,7 +656,7 @@
             }
             .dropdown {
                 position: static;
-                background-color: #fff;
+                background: #141416;
                 opacity: 1;
                 visibility: visible;
                 transform: none;
@@ -592,10 +668,16 @@
                 transition: max-height 0.3s ease;
                 right: auto;
                 left: auto;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0;
             }
             .nav-item.dropdown-active > .dropdown { max-height: 70vh; overflow-y: auto; }
-            .dropdown a { padding-left: 40px; background-color: #fff; }
-            .dropdown a:hover { background-color: #f3f1eb; }
+            .dropdown a { padding-left: 35px; color: #d1d5db; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; }
+            .dropdown a:hover { background-color: rgba(197, 160, 89, 0.15); padding-left: 40px; color: var(--color-gold); transform: none; box-shadow: none; }
             body::after {
                 content: '';
                 position: fixed;
@@ -619,16 +701,9 @@
                 gap: clamp(6px, 1.8vw, 12px);
                 padding: 10px clamp(8px, 2.5vw, 16px);
             }
-            .logo-kiri img, .logo-kanan img {
-                height: clamp(50px, 10vw, 72px);
-                max-height: 72px;
-            }
+            .logo-kiri img, .logo-kanan img { height: clamp(50px, 10vw, 72px); max-height: 72px; }
             .main-title { font-size: clamp(1.15rem, 4.8vw, 2rem); }
-            .tagline {
-                font-size: clamp(0.5rem, 1.5vw, 0.68rem);
-                letter-spacing: clamp(0.2px, 0.18vw, 1px);
-                margin-top: 6px;
-            }
+            .tagline { font-size: clamp(0.5rem, 1.5vw, 0.68rem); letter-spacing: clamp(0.2px, 0.18vw, 1px); margin-top: 6px; }
             .main-footer { padding: 36px 18px 24px; }
             .footer-brand p, .footer-section > p.media-text { text-align: left; }
             .contact-list li { min-width: 0; }
@@ -647,24 +722,15 @@
             .footer-brand span { font-size: 0.64rem; }
             .contact-list li { gap: 4px; }
         }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
     </style>
 </head>
-<body>
+<body data-theme="dark">
+    <!-- LOADING SCREEN -->
     <div id="preloader">
         <div class="loader-wrapper">
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
             
-            <!-- ORNAMEN BATIK EMAS PARANG-KAWUNG & GUNUNGAN -->
             <div class="batik-ornament-box" aria-hidden="true">
                 <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -676,96 +742,44 @@
                             <stop offset="100%" stop-color="#9A7634"/>
                         </linearGradient>
                         <linearGradient id="goldFillSoft" x1="350" y1="12" x2="350" y2="162" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="#C5A059" stop-opacity="0.22"/>
-                            <stop offset="100%" stop-color="#7A5A20" stop-opacity="0.06"/>
+                            <stop offset="0%" stop-color="#C5A059" stop-opacity="0.25"/>
+                            <stop offset="100%" stop-color="#7A5A20" stop-opacity="0.08"/>
                         </linearGradient>
                     </defs>
 
-                    <!-- SAYAP BATIK PARANG KIRI -->
                     <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
-                        <!-- Kontur Luar Sayap Parang Kiri -->
-                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
+                        <path class="batik-draw-main" stroke-width="2.2" fill="url(#goldFillSoft)"
                             d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
-                        <!-- Gelombang Parang Lapis 1 Kiri -->
-                        <path class="batik-draw-detail" stroke-width="1.5"
+                        <path class="batik-draw-detail" stroke-width="1.6"
                             d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
-                        <path class="batik-draw-detail" stroke-width="1.5"
-                            d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
                         <path class="batik-draw-detail" stroke-width="1.4"
-                            d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
-                        <path class="batik-draw-detail" stroke-width="1.7"
-                            d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
-                        <!-- Ulir / Mlinjon Klasik Kiri -->
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M126 36 C114 36, 108 43, 114 48 C120 52, 128 48, 126 43"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M174 54 C160 54, 154 62, 161 67 C168 72, 177 67, 174 61"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M222 72 C206 72, 198 81, 206 87 C214 92, 224 87, 221 80"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M258 92 C242 92, 235 100, 243 106 C250 111, 260 106, 257 99"/>
-                    </g>
-
-                    <!-- SAYAP BATIK PARANG KANAN (SIMETRIS) -->
-                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round" transform="translate(700, 0) scale(-1, 1)">
-                        <path class="batik-draw-main" stroke-width="2.1" fill="url(#goldFillSoft)"
-                            d="M312 52 C272 42, 232 22, 185 20 C145 18, 108 32, 68 24 C45 19, 28 24, 24 34 C38 42, 62 46, 85 52 C62 56, 48 64, 52 74 C68 78, 96 74, 122 80 C95 86, 84 96, 94 106 C116 112, 148 102, 178 108 C158 118, 155 129, 172 134 C205 138, 248 122, 298 128"/>
-                        <path class="batik-draw-detail" stroke-width="1.5"
-                            d="M306 64 C264 56, 224 36, 178 34 C140 32, 108 42, 74 37"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
                             d="M298 76 C256 68, 214 50, 168 48 C132 46, 104 56, 78 55"/>
-                        <path class="batik-draw-detail" stroke-width="1.5"
+                        <path class="batik-draw-detail" stroke-width="1.6"
                             d="M294 90 C252 84, 206 68, 158 68 C126 68, 104 76, 84 76"/>
-                        <path class="batik-draw-detail" stroke-width="1.4"
+                        <path class="batik-draw-detail" stroke-width="1.5"
                             d="M292 104 C248 98, 204 86, 160 88 C132 90, 114 96, 102 98"/>
-                        <path class="batik-draw-detail" stroke-width="1.7"
+                        <path class="batik-draw-detail" stroke-width="1.8"
                             d="M295 117 C250 112, 212 106, 174 114 C162 117, 164 124, 178 125 C212 126, 250 116, 296 121"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M126 36 C114 36, 108 43, 114 48 C120 52, 128 48, 126 43"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M174 54 C160 54, 154 62, 161 67 C168 72, 177 67, 174 61"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M222 72 C206 72, 198 81, 206 87 C214 92, 224 87, 221 80"/>
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M258 92 C242 92, 235 100, 243 106 C250 111, 260 106, 257 99"/>
-                    </g>
-
-                    <!-- GUNUNGAN WAYANG & INTI KAWUNG DI TENGAH -->
-                    <g stroke="url(#goldBatikGrad)" stroke-linecap="round" stroke-linejoin="round">
-                        <!-- Siluet Luar Gunungan -->
-                        <path class="batik-draw-main" stroke-width="2.3" fill="#0d0c0a"
-                            d="M350 12 C336 32, 314 56, 298 86 C290 102, 294 120, 310 132 L322 140 L322 158 L378 158 L378 140 L390 132 C406 120, 410 102, 402 86 C386 56, 364 32, 350 12 Z"/>
-                        <!-- Bingkai Dalam Gunungan -->
-                        <path class="batik-draw-detail" stroke-width="1.3"
-                            d="M350 22 C338 40, 320 62, 306 88 C300 100, 303 114, 316 125 L328 134 L328 152 L372 152 L372 134 L384 125 C397 114, 400 100, 394 88 C380 62, 362 40, 350 22 Z"/>
-                        <!-- Sulur Api & Akar di Dalam Gunungan -->
-                        <path class="batik-draw-detail" stroke-width="1.1"
-                            d="M350 32 L350 132 M350 108 C336 102, 326 92, 322 80 M350 108 C364 102, 374 92, 378 80 M350 122 C334 118, 322 110, 316 102 M350 122 C366 118, 378 110, 384 102"/>
-                        <!-- Gapura Bawah Gunungan -->
-                        <path class="batik-draw-detail" stroke-width="1.2"
-                            d="M335 158 L335 138 L365 138 L365 158 M344 158 L344 144 L356 144 L356 158"/>
-                    </g>
-
-                    <!-- MOTIF INTI BATIK KAWUNG (4 KELOPAK KETUPAT EMAS DI TENGAH GUNUNGAN) -->
-                    <g class="batik-kawung-core" stroke="url(#goldBatikGrad)" stroke-width="1.6" fill="#18140d">
-                        <!-- Kelopak Atas -->
-                        <polygon points="350,48 357,57 350,66 343,57"/>
-                        <!-- Kelopak Bawah -->
-                        <polygon points="350,78 357,87 350,96 343,87"/>
-                        <!-- Kelopak Kiri -->
-                        <polygon points="328,72 337,65 346,72 337,79"/>
-                        <!-- Kelopak Kanan -->
-                        <polygon points="372,72 363,65 354,72 363,79"/>
-                        <!-- Titik Inti Tengah -->
-                        <circle cx="350" cy="72" r="2.6" fill="#FFF0C2" stroke="none"/>
                     </g>
                 </svg>
             </div>
         </div>
     </div>
 
+    <!-- LIVE SYSTEM STATUS BAR -->
+    <div class="system-top-bar">
+        <div class="system-status-info">
+            <span><i class="status-dot"></i> SISTEM NASIONAL AKTIF & TERKENDALI</span>
+            <span style="opacity: 0.5;">|</span>
+            <span id="live-clock">Rabu, 18 Nov 2026 | 12:35:00 WIB</span>
+        </div>
+        <div class="top-bar-actions">
+            <button class="action-btn" id="search-trigger-btn"><i class="fa-solid fa-magnifying-glass"></i> Cari Dokumen</button>
+            <button class="action-btn" id="theme-toggle-btn"><i class="fa-solid fa-circle-half-stroke"></i> Mode</button>
+        </div>
+    </div>
+
+    <!-- HEADER SECTION -->
     <header class="header-container">
         <div class="logo-kiri">
             <img src="WhatsApp_Image_2026-11-02_at_11.33.19-removebg-preview.png" alt="Logo pohon GEINIA">
@@ -781,6 +795,7 @@
         </div>
     </header>
 
+    <!-- NAVIGASI UTAMA & MEGA MENU -->
     <nav>
         <button class="hamburger" type="button" aria-label="Buka menu navigasi" aria-expanded="false">
             <span></span><span></span><span></span>
@@ -790,23 +805,23 @@
             <div class="nav-item">
                 <a class="nav-link">Tentang GEINIA</a>
                 <div class="dropdown">
-                    <a href="sejarah.html">Sejarah dan Latar Belakang</a>
-                    <a href="filosofi.html">Filosofi dan Landasan Konseptual</a>
+                    <a href="sejarah.html">Sejarah & Latar Belakang</a>
+                    <a href="filosofi.html">Filosofi & Konseptual</a>
                     <a href="visi-misi.html">Visi dan Misi</a>
-                    <a href="nilai.html">Nilai dan Prinsip Dasar</a>
+                    <a href="nilai.html">Nilai & Prinsip Dasar</a>
                     <a href="tujuan.html">Tujuan Jangka Panjang</a>
-                    <a href="posisi.html">Posisi dan Peran Strategis</a>
+                    <a href="posisi.html">Posisi & Peran Strategis</a>
                 </div>
             </div>
             <div class="nav-item">
                 <a class="nav-link">Struktur & Sistem</a>
                 <div class="dropdown">
-                    <a href="struktur-organisasi.html">Gambaran Struktur Organisasi</a>
+                    <a href="struktur-organisasi.html">Struktur Organisasi</a>
                     <a href="pilar-utama.html">Dua Pilar Utama</a>
                     <a href="model-tata-kelola.html">Model Tata Kelola</a>
                     <a href="sistem-koordinasi.html">Sistem Koordinasi</a>
-                    <a href="mekanisme-keputusan.html">Mekanisme Pengambilan Keputusan</a>
-                    <a href="standar-etika.html">Standar Etika dan Disiplin</a>
+                    <a href="mekanisme-keputusan.html">Mekanisme Keputusan</a>
+                    <a href="standar-etika.html">Standar Etika & Disiplin</a>
                 </div>
             </div>
             <div class="nav-item">
@@ -815,7 +830,7 @@
                     <a href="grand-strategy.html">Grand Strategy</a>
                     <a href="roadmap.html">Roadmap Pengembangan</a>
                     <a href="kerangka-kebijakan.html">Kerangka Kebijakan</a>
-                    <a href="stabilitas.html">Stabilitas Ketahanan Sistem</a>
+                    <a href="stabilitas.html">Stabilitas Ketahanan</a>
                     <a href="identitas.html">Penguatan Identitas</a>
                 </div>
             </div>
@@ -824,7 +839,7 @@
                 <div class="dropdown">
                     <a href="program-sistem.html">Pengembangan Sistem</a>
                     <a href="program-lembaga.html">Penguatan Kelembagaan</a>
-                    <a href="program-inovasi.html">Inovasi dan Transformasi</a>
+                    <a href="program-inovasi.html">Inovasi & Transformasi</a>
                     <a href="program-kolaborasi.html">Kolaborasi Strategis</a>
                     <a href="program-kapasitas.html">Pengembangan Kapasitas</a>
                 </div>
@@ -833,10 +848,10 @@
                 <a class="nav-link">Tata Kelola</a>
                 <div class="dropdown">
                     <a href="governance-akuntabilitas.html">Prinsip Akuntabilitas</a>
-                    <a href="governance-transparansi.html">Transparansi dan Pengawasan</a>
+                    <a href="governance-transparansi.html">Transparansi & Pengawasan</a>
                     <a href="governance-sop.html">Standar Operasional Internal</a>
                     <a href="governance-evaluasi.html">Mekanisme Evaluasi</a>
-                    <a href="governance-integritas.html">Kepatuhan dan Integritas</a>
+                    <a href="governance-integritas.html">Kepatuhan & Integritas</a>
                 </div>
             </div>
             <div class="nav-item">
@@ -844,7 +859,7 @@
                 <div class="dropdown">
                     <a href="info-pernyataan.html">Pernyataan Resmi</a>
                     <a href="info-dokumentasi.html">Dokumentasi Kegiatan</a>
-                    <a href="info-artikel.html">Artikel & Pemikiran Strategis</a>
+                    <a href="info-artikel.html">Artikel & Pemikiran</a>
                     <a href="info-laporan.html">Laporan Berkala</a>
                     <a href="info-media.html">Media dan Publikasi</a>
                 </div>
@@ -862,7 +877,7 @@
                 <a class="nav-link">Kontak</a>
                 <div class="dropdown">
                     <a href="kontak-kami.html">Hubungi Kami</a>
-                    <a href="kontak-alamat.html">Alamat dan Informasi Resmi</a>
+                    <a href="kontak-alamat.html">Alamat & Informasi Resmi</a>
                     <a href="kontak-formulir.html">Formulir Komunikasi</a>
                     <a href="kontak-faq.html">Pertanyaan Umum (FAQ)</a>
                 </div>
@@ -870,11 +885,28 @@
         </div>
     </nav>
 
-    <main class="content-area">
-        <div class="container">
+    <!-- QUICK SEARCH MODAL -->
+    <div class="search-modal-overlay" id="search-modal">
+        <div class="search-modal-box">
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input-field" placeholder="Ketik kata kunci dokumen atau direktori...">
+                <i class="fa-solid fa-xmark" id="close-search-modal" style="cursor: pointer; color: #9ca3af;"></i>
+            </div>
+            <div class="search-suggestions">
+                <a href="grand-strategy.html" class="search-suggestion-item">Grand Strategy & Kerangka Sistem Nasional</a>
+                <a href="struktur-organisasi.html" class="search-suggestion-item">Gambaran Struktur Organisasi Holding</a>
+                <a href="info-pernyataan.html" class="search-suggestion-item">Pernyataan Resmi Dewan Eksekutif</a>
+                <a href="roadmap.html" class="search-suggestion-item">Roadmap Pengembangan Jangka Panjang</a>
+            </div>
         </div>
+    </div>
+
+    <main class="content-area">
+        <div class="container"></div>
     </main>
 
+    <!-- FOOTER UTAMA -->
     <footer class="main-footer">
         <div class="footer-wrapper">
             <div class="footer-section footer-brand">
@@ -926,21 +958,62 @@
     </footer>
 
     <script>
+        // Preloader Handler
         const preloader = document.getElementById('preloader');
-        const hidePreloader = () => {
+        window.setTimeout(() => {
             preloader.style.opacity = '0';
             preloader.style.visibility = 'hidden';
-        };
-        // Mengatur durasi preloader menjadi 4.5 detik (4500 milidetik)
-        window.setTimeout(hidePreloader, 4500);
+        }, 4500);
 
+        // Live Clock Generator
+        setInterval(() => {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+            const dateStr = now.toLocaleDateString('id-ID', options);
+            const timeStr = now.toTimeString().split(' ')[0] + ' WIB';
+            document.getElementById('live-clock').innerText = `${dateStr} | ${timeStr}`;
+        }, 1000);
+
+        // Dark / Light Mode Switcher
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const bodyTag = document.body;
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = bodyTag.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                bodyTag.setAttribute('data-theme', 'light');
+            } else {
+                bodyTag.setAttribute('data-theme', 'dark');
+            }
+        });
+
+        // Quick Search Modal Handler
+        const searchModal = document.getElementById('search-modal');
+        const searchTriggerBtn = document.getElementById('search-trigger-btn');
+        const closeSearchModal = document.getElementById('close-search-modal');
+
+        searchTriggerBtn.addEventListener('click', () => {
+            searchModal.classList.add('active');
+            document.getElementById('search-input-field').focus();
+        });
+
+        closeSearchModal.addEventListener('click', () => {
+            searchModal.classList.remove('active');
+        });
+
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                searchModal.classList.remove('active');
+            }
+        });
+
+        // Mobile Hamburger Menu
         const hamburger = document.querySelector('.hamburger');
-        const body = document.body;
         hamburger.addEventListener('click', () => {
-            const isOpen = body.classList.toggle('nav-active');
+            const isOpen = bodyTag.classList.toggle('nav-active');
             hamburger.setAttribute('aria-expanded', String(isOpen));
         });
 
+        // Dropdown Menu Toggles
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             const navLink = item.querySelector('.nav-link');
@@ -958,10 +1031,10 @@
             if (!e.target.closest('nav')) {
                 navItems.forEach(item => { item.classList.remove('dropdown-active'); });
             }
-            if (body.classList.contains('nav-active')
+            if (bodyTag.classList.contains('nav-active')
                 && !e.target.closest('.nav-inner')
                 && !e.target.closest('.hamburger')) {
-                body.classList.remove('nav-active');
+                bodyTag.classList.remove('nav-active');
                 hamburger.setAttribute('aria-expanded', 'false');
             }
         });
