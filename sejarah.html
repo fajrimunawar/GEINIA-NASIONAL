@@ -66,6 +66,9 @@
             width: 100%;
             max-width: 860px;
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .loader-main-text {
@@ -101,7 +104,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ORNAMEN BATIK EMAS --- */
+        /* --- ORNAMEN BATIK EMAS (ATAS) --- */
         .batik-ornament-box {
             width: min(680px, 94vw);
             margin: 22px auto 0;
@@ -141,23 +144,15 @@
         }
 
         @keyframes batikBoxReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes drawBatikStroke {
-            to {
-                stroke-dashoffset: 0;
-            }
+            to { stroke-dashoffset: 0; }
         }
 
         @keyframes coreBloom {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes batikGoldGlow {
@@ -166,7 +161,51 @@
             100% { filter: drop-shadow(0 0 22px rgba(245, 212, 138, 0.9)); }
         }
 
-        /* --- HEADER SECTION (DIPERBAIKI: SEJAJAR & PROPORSIONAL) --- */
+        /* --- LOADING ANIMASI KAWUNG BAWAH (PENGGANTI ANGKA) --- */
+        .loader-kawung-bottom {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInKawung 1s ease-out 1.5s forwards;
+        }
+
+        .kawung-spinner {
+            width: 45px;
+            height: 45px;
+            animation: spinKawung 4s linear infinite;
+            filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.6));
+        }
+
+        .kawung-spinner path {
+            fill: none;
+            stroke: var(--color-gold);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .kawung-dot {
+            fill: var(--color-gold);
+            animation: pulseDot 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes fadeInKawung {
+            to { opacity: 1; }
+        }
+
+        @keyframes spinKawung {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseDot {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* --- HEADER SECTION --- */
         .header-container {
             display: grid;
             grid-template-columns: clamp(76px, 11vw, 155px) minmax(0, 1fr) clamp(76px, 11vw, 155px);
@@ -186,11 +225,10 @@
         .logo-kiri { justify-content: flex-start; }
         .logo-kanan { justify-content: flex-end; }
 
-        /* Memaksa tinggi logo kiri dan kanan sama persis agar sejajar atas-bawah */
         .logo-kiri img, .logo-kanan img { 
             width: 100%; 
-            height: 146px; /* Tinggi fix agar sejajar */
-            object-fit: contain; /* Menjaga proporsi gambar agar tidak gepeng */
+            height: 146px;
+            object-fit: contain;
         }
 
         .brand-wrapper {
@@ -204,7 +242,6 @@
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            /* Ukuran font dinaikkan sedikit agar lebih gagah */
             font-size: clamp(1.4rem, 5.2vw, 4.3rem); 
             font-weight: 900;
             line-height: 1.1;
@@ -272,7 +309,7 @@
         .nav-item:last-child .nav-link { padding-right: 0; }
         .nav-item:hover .nav-link { color: var(--color-gold); }
 
-        /* --- DESAIN SUB-MENU (DROPDOWN) BARU: MEWAH & PROFESIONAL --- */
+        /* --- DESAIN SUB-MENU (DROPDOWN) MEWAH --- */
         .dropdown {
             position: absolute;
             top: calc(100% + 5px);
@@ -316,7 +353,6 @@
         
         .dropdown a:last-child { border-bottom: none; }
 
-        /* Efek Hover Sub-menu */
         .dropdown a::before {
             content: '';
             position: absolute;
@@ -336,13 +372,10 @@
             padding-left: 32px;
         }
 
-        .dropdown a:hover::before {
-            transform: scaleY(1);
-        }
+        .dropdown a:hover::before { transform: scaleY(1); }
 
-        /* Ikon panah kecil di sub-menu */
         .dropdown a::after {
-            content: '\f105'; /* FontAwesome chevron-right */
+            content: '\f105';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
@@ -354,10 +387,7 @@
             font-size: 0.8rem;
         }
 
-        .dropdown a:hover::after {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .dropdown a:hover::after { opacity: 1; transform: translateX(0); }
 
         .hamburger {
             display: none;
@@ -550,7 +580,7 @@
                 gap: clamp(8px, 1.4vw, 16px);
             }
             .logo-kiri img, .logo-kanan img {
-                height: 100px; /* Tinggi disesuaikan untuk tablet */
+                height: 100px;
             }
             .main-title { font-size: clamp(1.65rem, 4.5vw, 2.8rem); }
             .tagline {
@@ -602,7 +632,6 @@
                 text-align: left;
                 white-space: normal;
             }
-            /* Penyesuaian Dropdown untuk Mobile */
             .dropdown {
                 position: static;
                 background-color: #fff;
@@ -659,7 +688,7 @@
                 padding: 10px clamp(8px, 2.5vw, 16px);
             }
             .logo-kiri img, .logo-kanan img {
-                height: 75px; /* Tinggi logo di HP */
+                height: 75px;
             }
             .main-title { font-size: clamp(1.15rem, 4.8vw, 2rem); }
             .tagline {
@@ -702,7 +731,7 @@
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
             
-            <!-- ORNAMEN BATIK EMAS -->
+            <!-- ORNAMEN BATIK EMAS (SAYAP & GUNUNGAN) -->
             <div class="batik-ornament-box" aria-hidden="true">
                 <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -787,6 +816,21 @@
                         <polygon points="374,72 364,64 354,72 364,80"/>
                         <circle cx="350" cy="72" r="2.8" fill="#FFF0C2" stroke="none"/>
                     </g>
+                </svg>
+            </div>
+
+            <!-- ANIMASI KAWUNG BERPUTAR (PENGGANTI ANGKA) -->
+            <div class="loader-kawung-bottom" aria-hidden="true">
+                <svg class="kawung-spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 4 Kelopak Kawung -->
+                    <path d="M50 15 C60 15, 65 25, 50 35 C35 25, 40 15, 50 15 Z" />
+                    <path d="M85 50 C85 60, 75 65, 65 50 C75 35, 85 40, 85 50 Z" />
+                    <path d="M50 85 C40 85, 35 75, 50 65 C65 75, 60 85, 50 85 Z" />
+                    <path d="M15 50 C15 40, 25 35, 35 50 C25 65, 15 60, 15 50 Z" />
+                    <!-- Titik tengah -->
+                    <circle cx="50" cy="50" r="4" class="kawung-dot" />
+                    <!-- Garis luar putus-putus (opsional untuk kesan loading) -->
+                    <circle cx="50" cy="50" r="42" stroke="rgba(197, 160, 89, 0.3)" stroke-width="1.5" stroke-dasharray="8 6" fill="none" />
                 </svg>
             </div>
         </div>
