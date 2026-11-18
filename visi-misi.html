@@ -22,6 +22,7 @@
             --border: #e0e0e0;
             --light-gray: #f8f9fa;
             --color-gold: #C5A059;
+            --color-gold-light: #F4D58D;
         }
 
         * {
@@ -50,23 +51,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, #141414 0%, #000000 85%);
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 85%);
             z-index: 99999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
         }
 
-        /* Kontainer utama loading agar Penjor dan Teks sejajar */
+        /* Kontainer utama loading agar Penjor dan Teks sejajar di bawah */
         .loader-stage {
             position: relative;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Kunci sejajar bagian bawah */
+            align-items: flex-end; 
             padding: 0 20px;
         }
 
@@ -79,18 +80,19 @@
             align-items: center;
             text-align: center;
             width: 100%;
-            max-width: 680px;
+            max-width: 700px;
+            padding-bottom: 10px; /* Sedikit jarak dari dasar */
         }
 
         .loader-main-text {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 8.5vw, 3.8rem);
+            font-size: clamp(2rem, 8.5vw, 4rem);
             font-weight: 900;
             color: #ffffff;
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 1.2vw, 5px);
+            letter-spacing: clamp(1px, 1.2vw, 6px);
             line-height: 1.15;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
             opacity: 0;
             transform: translateY(30px);
             animation: textReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -98,11 +100,11 @@
 
         .loader-sub-text {
             font-family: 'Inter', sans-serif;
-            font-size: clamp(0.75rem, 3.2vw, 1.05rem);
+            font-size: clamp(0.75rem, 3.2vw, 1.1rem);
             font-weight: 600;
-            color: var(--color-gold);
+            color: var(--color-gold-light);
             text-transform: uppercase;
-            letter-spacing: clamp(1px, 0.9vw, 4px);
+            letter-spacing: clamp(1px, 0.9vw, 5px);
             line-height: 1.5;
             padding: 0 16px;
             margin-top: 12px;
@@ -118,7 +120,7 @@
         /* --- ORNAMEN BATIK EMAS (TENGAH) --- */
         .batik-ornament-box {
             width: 100%;
-            margin: 22px auto 0;
+            margin: 25px auto 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -131,7 +133,7 @@
             width: 100%;
             height: auto;
             overflow: visible;
-            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
+            filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.5));
             animation: batikGoldGlow 3.6s ease-in-out 0.6s forwards;
         }
 
@@ -167,33 +169,33 @@
         }
 
         @keyframes batikGoldGlow {
-            0% { filter: drop-shadow(0 0 4px rgba(197, 160, 89, 0.2)); }
-            65% { filter: drop-shadow(0 0 16px rgba(235, 198, 120, 0.7)); }
-            100% { filter: drop-shadow(0 0 22px rgba(245, 212, 138, 0.9)); }
+            0% { filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.3)); }
+            65% { filter: drop-shadow(0 0 20px rgba(235, 198, 120, 0.8)); }
+            100% { filter: drop-shadow(0 0 25px rgba(245, 212, 138, 1)); }
         }
 
-        /* --- ANIMASI PENJOR KIRI & KANAN --- */
+        /* --- ANIMASI PENJOR KIRI & KANAN (DESAIN BARU) --- */
         .penjor-wrapper {
             position: absolute;
             bottom: 0;
-            width: clamp(120px, 20vw, 250px); /* Ukuran proporsional */
+            width: clamp(180px, 25vw, 320px); /* Ukuran lebih besar & proporsional */
             opacity: 0;
             pointer-events: none;
         }
 
         .penjor-kiri {
-            left: clamp(10px, 5vw, 50px);
-            transform-origin: bottom right;
-            animation: penjorReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
+            left: clamp(-20px, 2vw, 30px);
+            transform-origin: bottom center;
+            animation: penjorFadeIn 1s ease-out 0.5s forwards;
         }
 
         .penjor-kanan {
-            right: clamp(10px, 5vw, 50px);
-            transform-origin: bottom left;
-            animation: penjorReveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
+            right: clamp(-20px, 2vw, 30px);
+            transform-origin: bottom center;
+            animation: penjorFadeIn 1s ease-out 0.5s forwards;
         }
 
-        @keyframes penjorReveal {
+        @keyframes penjorFadeIn {
             to { opacity: 1; }
         }
 
@@ -203,11 +205,11 @@
             overflow: visible;
         }
 
-        /* Animasi Menggambar Batang Penjor (Tumbuh dari bawah ke atas) */
+        /* Animasi Menggambar Batang & Janur Penjor */
         .penjor-draw {
-            stroke-dasharray: 1200;
-            stroke-dashoffset: 1200;
-            animation: drawPenjor 2s cubic-bezier(0.25, 0.85, 0.35, 1) 1s forwards;
+            stroke-dasharray: 1500;
+            stroke-dashoffset: 1500;
+            animation: drawPenjor 2.5s cubic-bezier(0.25, 0.85, 0.35, 1) 0.8s forwards;
         }
 
         @keyframes drawPenjor {
@@ -218,32 +220,35 @@
         .penjor-hanging {
             opacity: 0;
             transform-origin: top center;
-            animation: hangingReveal 1s ease-out 2.5s forwards, swing 4s ease-in-out 3.5s infinite alternate;
+            animation: hangingReveal 1s ease-out 2.8s forwards, swingHanging 4s ease-in-out 3.5s infinite alternate;
         }
 
         @keyframes hangingReveal {
             to { opacity: 1; }
         }
 
-        @keyframes swing {
-            0% { transform: rotate(-3deg); }
-            100% { transform: rotate(3deg); }
+        @keyframes swingHanging {
+            0% { transform: rotate(-4deg); }
+            100% { transform: rotate(4deg); }
         }
 
-        /* Animasi Denyut Cahaya (Glow) untuk efek Loading */
-        .penjor-glow {
-            animation: penjorPulse 2s infinite alternate;
+        /* Animasi Denyut Cahaya (Glow) Berjalan untuk efek Loading */
+        .penjor-pulse {
+            animation: penjorGlow 2.5s infinite alternate;
         }
 
-        @keyframes penjorPulse {
-            0% { filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.4)); }
-            100% { filter: drop-shadow(0 0 20px rgba(235, 198, 120, 0.9)); }
+        @keyframes penjorGlow {
+            0% { filter: drop-shadow(0 0 8px rgba(197, 160, 89, 0.5)); }
+            100% { filter: drop-shadow(0 0 25px rgba(235, 198, 120, 0.9)); }
         }
 
-        /* Sembunyikan Penjor di layar sangat kecil agar tidak menabrak */
-        @media (max-width: 600px) {
+        /* Penyesuaian Responsif: Sembunyikan Penjor di layar sangat kecil */
+        @media (max-width: 768px) {
             .penjor-wrapper {
-                display: none; /* Fokus ke teks di HP */
+                display: none; 
+            }
+            .loader-stage {
+                padding: 0;
             }
         }
 
@@ -769,38 +774,53 @@
 </head>
 <body>
     <div id="preloader">
-        <!-- Menggunakan Flexbox untuk mensejajarkan Penjor dan Konten Tengah -->
+        <!-- Menggunakan Flexbox untuk mensejajarkan Penjor dan Konten Tengah di bagian bawah -->
         <div class="loader-stage">
             
-            <!-- PENJOR KIRI -->
+            <!-- PENJOR KIRI (Desain Baru Lebih Detail) -->
             <div class="penjor-wrapper penjor-kiri" aria-hidden="true">
-                <svg class="penjor-svg penjor-glow" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="penjor-svg penjor-pulse" viewBox="0 0 250 500" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="goldPenjor" x1="0" y1="400" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="#7A5A20"/>
-                            <stop offset="50%" stop-color="#E7C87D"/>
-                            <stop offset="100%" stop-color="#FFF0C2"/>
+                        <linearGradient id="goldPenjor" x1="0" y1="500" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#5C4214"/>
+                            <stop offset="40%" stop-color="#C5A059"/>
+                            <stop offset="80%" stop-color="#F4D58D"/>
+                            <stop offset="100%" stop-color="#FFF5D1"/>
                         </linearGradient>
                     </defs>
                     
-                    <!-- Batang Bambu Melengkung -->
-                    <path class="penjor-draw" d="M100 400 L100 250 C100 150, 140 100, 190 80" stroke="url(#goldPenjor)" stroke-width="3" stroke-linecap="round" />
-                    <path class="penjor-draw" d="M100 400 L100 250 C100 150, 140 100, 190 80" stroke="rgba(197, 160, 89, 0.3)" stroke-width="8" stroke-linecap="round" style="filter: blur(4px);"/>
+                    <!-- Batang Bambu Melengkung (Beruas) -->
+                    <path class="penjor-draw" d="M125 500 L125 300 C125 180, 170 80, 230 50" stroke="url(#goldPenjor)" stroke-width="4" stroke-linecap="round" />
                     
-                    <!-- Hiasan Daun/Janur (Kiri) -->
+                    <!-- Ruas Bambu -->
+                    <g class="penjor-hanging" stroke="url(#goldPenjor)" stroke-width="2" stroke-linecap="round">
+                        <path d="M125 450 L125 445 M125 400 L125 395 M125 350 L125 345 M125 300 L125 295 M125 260 L125 255"/>
+                    </g>
+
+                    <!-- Rimbunan Janur (Daun Kelapa) -->
+                    <g class="penjor-draw" stroke="url(#goldPenjor)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Janur Kiri Bawah -->
+                        <path d="M125 350 C100 330, 60 330, 50 360 C70 350, 90 355, 125 365" fill="rgba(197, 160, 89, 0.15)" />
+                        <path d="M125 340 C90 310, 40 310, 30 340 C60 330, 80 335, 125 350" fill="rgba(197, 160, 89, 0.15)" />
+                        <!-- Janur Kanan Bawah -->
+                        <path d="M125 360 C150 340, 190 340, 200 370 C180 360, 160 365, 125 375" fill="rgba(197, 160, 89, 0.15)" />
+                        <path d="M125 370 C160 350, 210 350, 220 380 C190 370, 170 375, 125 385" fill="rgba(197, 160, 89, 0.15)" />
+                        <!-- Janur Tengah Menjulang -->
+                        <path d="M125 300 C100 270, 80 240, 110 200 C110 230, 120 260, 125 280" fill="rgba(197, 160, 89, 0.2)" />
+                        <path d="M125 300 C150 270, 170 240, 140 200 C140 230, 130 260, 125 280" fill="rgba(197, 160, 89, 0.2)" />
+                        <path d="M125 290 C115 240, 120 180, 125 150 C130 180, 135 240, 125 290" fill="rgba(197, 160, 89, 0.3)" />
+                    </g>
+
+                    <!-- Hiasan Gantung (Umbul-umbul Sederhana) -->
                     <g class="penjor-hanging" stroke="url(#goldPenjor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <!-- Janur Bawah -->
-                        <path d="M100 350 C80 340, 60 355, 70 370 C80 385, 95 370, 100 360" fill="rgba(197, 160, 89, 0.1)" />
-                        <path d="M100 350 C120 340, 140 355, 130 370 C120 385, 105 370, 100 360" fill="rgba(197, 160, 89, 0.1)" />
-                        <path d="M100 330 C85 320, 65 330, 75 345 C85 360, 95 345, 100 335" fill="rgba(197, 160, 89, 0.1)" />
-                        <path d="M100 330 C115 320, 135 330, 125 345 C115 360, 105 345, 100 335" fill="rgba(197, 160, 89, 0.1)" />
-                        
-                        <!-- Hiasan Gantung (Umbul-umbul) -->
-                        <path d="M185 85 L185 150" stroke-width="2"/>
-                        <path d="M175 100 L195 100 L190 110 L180 110 Z" fill="#C5A059"/>
-                        <path d="M172 115 L198 115 L192 125 L178 125 Z" fill="#C5A059"/>
-                        <path d="M170 130 L200 130 L193 145 L177 145 Z" fill="#C5A059"/>
-                        <path d="M185 150 L185 180" stroke-width="1.5" stroke-dasharray="2 2"/>
+                        <!-- Tali Gantung -->
+                        <path d="M225 60 L225 130" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <!-- Tingkat 1 -->
+                        <path d="M210 80 L240 80 L235 95 L215 95 Z" fill="#C5A059"/>
+                        <path d="M215 95 L235 95 L230 110 L220 110 Z" fill="#C5A059"/>
+                        <path d="M220 110 L230 110 L228 120 L222 120 Z" fill="#C5A059"/>
+                        <!-- Rumbai bawah -->
+                        <path d="M222 120 L222 140 M225 120 L225 145 M228 120 L228 140" stroke-width="1"/>
                     </g>
                 </svg>
             </div>
@@ -862,34 +882,47 @@
                 </div>
             </div>
 
-            <!-- PENJOR KANAN -->
+            <!-- PENJOR KANAN (Desain Baru Lebih Detail - Dicerminkan dari Kiri) -->
             <div class="penjor-wrapper penjor-kanan" aria-hidden="true">
-                <svg class="penjor-svg penjor-glow" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="penjor-svg penjor-pulse" viewBox="0 0 250 500" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="goldPenjorRight" x1="0" y1="400" x2="0" y2="0" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stop-color="#7A5A20"/>
-                            <stop offset="50%" stop-color="#E7C87D"/>
-                            <stop offset="100%" stop-color="#FFF0C2"/>
+                        <linearGradient id="goldPenjorRight" x1="0" y1="500" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#5C4214"/>
+                            <stop offset="40%" stop-color="#C5A059"/>
+                            <stop offset="80%" stop-color="#F4D58D"/>
+                            <stop offset="100%" stop-color="#FFF5D1"/>
                         </linearGradient>
                     </defs>
                     
                     <!-- Batang Bambu Melengkung (Kanan) -->
-                    <path class="penjor-draw" d="M100 400 L100 250 C100 150, 60 100, 10 80" stroke="url(#goldPenjorRight)" stroke-width="3" stroke-linecap="round" />
-                    <path class="penjor-draw" d="M100 400 L100 250 C100 150, 60 100, 10 80" stroke="rgba(197, 160, 89, 0.3)" stroke-width="8" stroke-linecap="round" style="filter: blur(4px);"/>
+                    <path class="penjor-draw" d="M125 500 L125 300 C125 180, 80 80, 20 50" stroke="url(#goldPenjorRight)" stroke-width="4" stroke-linecap="round" />
                     
-                    <!-- Hiasan Daun/Janur (Kanan) -->
+                    <!-- Ruas Bambu -->
+                    <g class="penjor-hanging" stroke="url(#goldPenjorRight)" stroke-width="2" stroke-linecap="round">
+                        <path d="M125 450 L125 445 M125 400 L125 395 M125 350 L125 345 M125 300 L125 295 M125 260 L125 255"/>
+                    </g>
+
+                    <!-- Rimbunan Janur (Kanan) -->
+                    <g class="penjor-draw" stroke="url(#goldPenjorRight)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Janur Kanan Bawah -->
+                        <path d="M125 350 C150 330, 190 330, 200 360 C180 350, 160 355, 125 365" fill="rgba(197, 160, 89, 0.15)" />
+                        <path d="M125 340 C160 310, 210 310, 220 340 C190 330, 170 335, 125 350" fill="rgba(197, 160, 89, 0.15)" />
+                        <!-- Janur Kiri Bawah -->
+                        <path d="M125 360 C100 340, 60 340, 50 370 C70 360, 90 365, 125 375" fill="rgba(197, 160, 89, 0.15)" />
+                        <path d="M125 370 C90 350, 40 350, 30 380 C60 370, 80 375, 125 385" fill="rgba(197, 160, 89, 0.15)" />
+                        <!-- Janur Tengah Menjulang -->
+                        <path d="M125 300 C150 270, 170 240, 140 200 C140 230, 130 260, 125 280" fill="rgba(197, 160, 89, 0.2)" />
+                        <path d="M125 300 C100 270, 80 240, 110 200 C110 230, 120 260, 125 280" fill="rgba(197, 160, 89, 0.2)" />
+                        <path d="M125 290 C135 240, 130 180, 125 150 C120 180, 115 240, 125 290" fill="rgba(197, 160, 89, 0.3)" />
+                    </g>
+
+                    <!-- Hiasan Gantung (Umbul-umbul) -->
                     <g class="penjor-hanging" stroke="url(#goldPenjorRight)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M100 350 C80 340, 60 355, 70 370 C80 385, 95 370, 100 360" fill="rgba(197, 160, 89, 0.1)" />
-                        <path d="M100 350 C120 340, 140 355, 130 370 C120 385, 105 370, 100 360" fill="rgba(197, 160, 89, 0.1)" />
-                        <path d="M100 330 C85 320, 65 330, 75 345 C85 360, 95 345, 100 335" fill="rgba(197, 160, 89, 0.1)" />
-                        <path d="M100 330 C115 320, 135 330, 125 345 C115 360, 105 345, 100 335" fill="rgba(197, 160, 89, 0.1)" />
-                        
-                        <!-- Hiasan Gantung (Umbul-umbul) -->
-                        <path d="M15 85 L15 150" stroke-width="2"/>
-                        <path d="M5 100 L25 100 L20 110 L10 110 Z" fill="#C5A059"/>
-                        <path d="M2 115 L28 115 L22 125 L8 125 Z" fill="#C5A059"/>
-                        <path d="M0 130 L30 130 L23 145 L7 145 Z" fill="#C5A059"/>
-                        <path d="M15 150 L15 180" stroke-width="1.5" stroke-dasharray="2 2"/>
+                        <path d="M25 60 L25 130" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <path d="M10 80 L40 80 L35 95 L15 95 Z" fill="#C5A059"/>
+                        <path d="M15 95 L35 95 L30 110 L20 110 Z" fill="#C5A059"/>
+                        <path d="M20 110 L30 110 L28 120 L22 120 Z" fill="#C5A059"/>
+                        <path d="M22 120 L22 140 M25 120 L25 145 M28 120 L28 140" stroke-width="1"/>
                     </g>
                 </svg>
             </div>
