@@ -43,7 +43,7 @@
             overflow-x: hidden;
         }
 
-        /* --- LOADING SCREEN (4.5 DETIK + ORNAMEN BATIK PARANG-KAWUNG GUNUNGAN DIPERBESAR & DIPERHALUS) --- */
+        /* --- LOADING SCREEN --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -101,7 +101,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ORNAMEN BATIK EMAS (UKURAN LEBIH BESAR, PROPORSIONAL, DAN SANGAT MIRIP GAMBAR) --- */
+        /* --- ORNAMEN BATIK EMAS --- */
         .batik-ornament-box {
             width: min(680px, 94vw);
             margin: 22px auto 0;
@@ -166,7 +166,7 @@
             100% { filter: drop-shadow(0 0 22px rgba(245, 212, 138, 0.9)); }
         }
 
-        /* --- HEADER SECTION --- */
+        /* --- HEADER SECTION (DIPERBAIKI: SEJAJAR & PROPORSIONAL) --- */
         .header-container {
             display: grid;
             grid-template-columns: clamp(76px, 11vw, 155px) minmax(0, 1fr) clamp(76px, 11vw, 155px);
@@ -177,25 +177,20 @@
             margin: 0 auto;
         }
 
-        .logo-kiri {
+        .logo-kiri, .logo-kanan {
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: flex-start;
         }
 
-        .logo-kanan {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
+        .logo-kiri { justify-content: flex-start; }
+        .logo-kanan { justify-content: flex-end; }
 
+        /* Memaksa tinggi logo kiri dan kanan sama persis agar sejajar atas-bawah */
         .logo-kiri img, .logo-kanan img { 
             width: 100%; 
-            height: clamp(74px, 11vw, 146px);
-            max-height: 146px;
-            object-fit: contain;
+            height: 146px; /* Tinggi fix agar sejajar */
+            object-fit: contain; /* Menjaga proporsi gambar agar tidak gepeng */
         }
 
         .brand-wrapper {
@@ -209,7 +204,8 @@
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.25rem, 4.8vw, 4rem);
+            /* Ukuran font dinaikkan sedikit agar lebih gagah */
+            font-size: clamp(1.4rem, 5.2vw, 4.3rem); 
             font-weight: 900;
             line-height: 1.1;
             text-transform: uppercase;
@@ -274,23 +270,26 @@
 
         .nav-item:first-child .nav-link { padding-left: 0; }
         .nav-item:last-child .nav-link { padding-right: 0; }
-        .nav-item:hover .nav-link { color: var(--red); }
+        .nav-item:hover .nav-link { color: var(--color-gold); }
 
+        /* --- DESAIN SUB-MENU (DROPDOWN) BARU: MEWAH & PROFESIONAL --- */
         .dropdown {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 5px);
             left: 0;
             z-index: 1100;
-            background-color: #fff;
-            min-width: min(250px, calc(100vw - 24px));
-            max-width: min(320px, calc(100vw - 24px));
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            min-width: min(280px, calc(100vw - 24px));
+            max-width: min(340px, calc(100vw - 24px));
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.05);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            border-top: 3px solid var(--color-gold);
+            transform: translateY(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 6px;
+            border-top: 4px solid var(--color-gold);
+            padding: 8px 0;
+            overflow: hidden;
         }
 
         .nav-item:nth-last-child(-n+2) .dropdown { right: 0; left: auto; }
@@ -302,23 +301,64 @@
         }
 
         .dropdown a {
-            display: block;
-            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            padding: 14px 24px;
             text-decoration: none;
-            color: #333;
+            color: #333333;
             font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        .dropdown a:last-child { border-bottom: none; }
-
-        .dropdown a:hover {
-            background: var(--light-gray);
-            color: var(--color-gold);
-            padding-left: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            background: transparent;
         }
         
+        .dropdown a:last-child { border-bottom: none; }
+
+        /* Efek Hover Sub-menu */
+        .dropdown a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-color: var(--color-gold);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+
+        .dropdown a:hover {
+            background: linear-gradient(90deg, #fdfaf5 0%, #ffffff 100%);
+            color: var(--color-gold);
+            padding-left: 32px;
+        }
+
+        .dropdown a:hover::before {
+            transform: scaleY(1);
+        }
+
+        /* Ikon panah kecil di sub-menu */
+        .dropdown a::after {
+            content: '\f105'; /* FontAwesome chevron-right */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            color: var(--color-gold);
+            font-size: 0.8rem;
+        }
+
+        .dropdown a:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         .hamburger {
             display: none;
             position: absolute;
@@ -510,8 +550,7 @@
                 gap: clamp(8px, 1.4vw, 16px);
             }
             .logo-kiri img, .logo-kanan img {
-                height: clamp(64px, 9vw, 96px);
-                max-height: 96px;
+                height: 100px; /* Tinggi disesuaikan untuk tablet */
             }
             .main-title { font-size: clamp(1.65rem, 4.5vw, 2.8rem); }
             .tagline {
@@ -563,6 +602,7 @@
                 text-align: left;
                 white-space: normal;
             }
+            /* Penyesuaian Dropdown untuk Mobile */
             .dropdown {
                 position: static;
                 background-color: #fff;
@@ -574,13 +614,27 @@
                 max-width: 100%;
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.3s ease;
+                transition: max-height 0.4s ease, padding 0.4s ease;
                 right: auto;
                 left: auto;
+                border-top: none;
+                padding: 0;
+                border-radius: 0;
             }
-            .nav-item.dropdown-active > .dropdown { max-height: 70vh; overflow-y: auto; }
-            .dropdown a { padding-left: 40px; background-color: #fff; }
-            .dropdown a:hover { background-color: #f3f1eb; }
+            .nav-item.dropdown-active > .dropdown { 
+                max-height: 70vh; 
+                overflow-y: auto;
+                padding: 10px 0;
+                border-top: 1px solid #eee;
+            }
+            .dropdown a { 
+                padding: 12px 30px 12px 40px; 
+                background-color: #fafafa; 
+                font-size: 0.8rem;
+            }
+            .dropdown a::before, .dropdown a::after { display: none; }
+            .dropdown a:hover { background-color: #f3f1eb; padding-left: 45px; }
+            
             body::after {
                 content: '';
                 position: fixed;
@@ -605,8 +659,7 @@
                 padding: 10px clamp(8px, 2.5vw, 16px);
             }
             .logo-kiri img, .logo-kanan img {
-                height: clamp(50px, 10vw, 72px);
-                max-height: 72px;
+                height: 75px; /* Tinggi logo di HP */
             }
             .main-title { font-size: clamp(1.15rem, 4.8vw, 2rem); }
             .tagline {
@@ -623,7 +676,7 @@
 
         @media (max-width: 420px) {
             .header-container { grid-template-columns: clamp(46px, 13vw, 54px) minmax(0, 1fr) clamp(46px, 13vw, 54px); gap: 5px; padding-inline: 6px; }
-            .logo-kiri img, .logo-kanan img { height: clamp(46px, 13vw, 54px); }
+            .logo-kiri img, .logo-kanan img { height: 60px; }
             .main-title { font-size: clamp(1rem, 5vw, 1.25rem); letter-spacing: 0; }
             .tagline { font-size: clamp(0.46rem, 2vw, 0.54rem); letter-spacing: 0.2px; }
             .nav-link { padding-inline: 18px; }
@@ -649,7 +702,7 @@
             <div class="loader-main-text">GEINIA NASIONAL</div>
             <div class="loader-sub-text">PUSAT INTEGRASI STRATEGIS</div>
             
-            <!-- ORNAMEN BATIK EMAS (DIKEMBANGKAN LEBIH BESAR & SANGAT PRESISI) -->
+            <!-- ORNAMEN BATIK EMAS -->
             <div class="batik-ornament-box" aria-hidden="true">
                 <svg class="batik-svg" viewBox="0 0 700 175" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -726,7 +779,7 @@
                             d="M333 160 L333 138 L367 138 L367 160 M342 160 L342 144 L358 144 L358 160"/>
                     </g>
 
-                    <!-- MOTIF INTI BATIK KAWUNG (4 KELOPAK KETUPAT EMAS DI TENGAH GUNUNGAN) -->
+                    <!-- MOTIF INTI BATIK KAWUNG -->
                     <g class="batik-kawung-core" stroke="url(#goldBatikGrad)" stroke-width="1.7" fill="#18140d">
                         <polygon points="350,46 358,56 350,66 342,56"/>
                         <polygon points="350,78 358,88 350,98 342,88"/>
@@ -904,7 +957,6 @@
             preloader.style.opacity = '0';
             preloader.style.visibility = 'hidden';
         };
-        // Durasi preloader tetap 4.5 detik sesuai ketentuan
         window.setTimeout(hidePreloader, 4500);
 
         const hamburger = document.querySelector('.hamburger');
